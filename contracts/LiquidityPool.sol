@@ -20,7 +20,7 @@ contract LiquidityPool is Ownable {
     address public feePool;
     IMicroloanManager public loanPool;
     IERC20Decimals public immutable usdc;
-    IERC20Decimals public immutable asset;   // e.g., MXNe or BRZ
+    IERC20Decimals public immutable asset;   // e.g., MXNb
     uint256 public totalShares;
     uint256 public totalWithdrawalRequested;// in tokens
     uint256 public totalBalances;// in tokens

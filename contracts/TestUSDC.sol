@@ -4,15 +4,9 @@ pragma solidity ^0.8.20;
 import "https://cdn.jsdelivr.net/npm/@openzeppelin/contracts@4.9.3/token/ERC20/ERC20.sol";
 import "https://cdn.jsdelivr.net/npm/@openzeppelin/contracts@4.9.3/access/Ownable.sol";
 
-/**
- * @title TestMXNe
- * @dev Simple ERC20 to mimic MXNe on Base mainnet:
- *  - 6 decimals
- *  - fixed initial supply minted at deploy
- *  - Ownable for future mint/burn controls
- */
+
 contract TestUSDC is ERC20, Ownable {
-    /// @notice Set decimals to 6, matching MXNe stablecoin
+    /// @notice Set decimals to 6
     function decimals() public pure override returns (uint8) {
         return 6;
     }

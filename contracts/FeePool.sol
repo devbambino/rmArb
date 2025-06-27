@@ -16,7 +16,7 @@ contract FeePool is Ownable {
     using SafeERC20 for IERC20;
 
     address public manager;
-    IERC20 public immutable asset;       // fee token, e.g., TestMXNe
+    IERC20 public immutable asset;       // fee token, e.g., TestMXNb
     ILiquidityPool public immutable liquidityPool;
     address public treasury;
 
