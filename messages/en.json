@@ -1,0 +1,304 @@
+{
+  "metadata": {
+    "root": {
+      "title": "RapiMoni | Stablecoin Payments & Zero-Interest Microloans",
+      "description": "RapiMoni brings stablecoin payments and zero-interest microloans to LATAM. Empowering purchases, empowering you."
+    },
+    "merchants": {
+      "image": "/social/og-merchants-en.png",
+      "title": "RapiMoni for Merchants",
+      "description": "Increase your sales by accepting digital payments and offering zero-interest installment plans. No hardware, no chargebacks, instant settlement.",
+      "ogTitle": "Grow Your Business with RapiMoni",
+      "ogDescription": "Attract new customers and improve your cash flow with instant, secure stablecoin payments and microloans."
+    },
+    "borrowers": {
+      "image": "/social/og-borrowers-en.png",
+      "title": "Pay Your Way with RapiMoni",
+      "description": "Pay in full or split your purchase into easy, zero-interest payments. No credit card, no hassle. The smart way to pay.",
+      "ogTitle": "The Smart Way to Pay. Flexible, Fair, and Simple.",
+      "ogDescription": "Spotted a RapiMoni QR code? Pay now or split your purchase into easy, zero-interest payments."
+    },
+    "lenders": {
+      "image": "/social/og-lenders-en.png",
+      "title": "Earn High-Yield Returns with RapiMoni",
+      "description": "Provide liquidity to power zero-interest microloans in Latin America and earn a stable, low-volatility yield, paid in stablecoins.",
+      "ogTitle": "Earn Stable, High-Yield Returns. Fuel Real-World Growth.",
+      "ogDescription": "Provide liquidity to RapiMoni's audited lending pool and earn a competitive APY from real-world economic activity."
+    }
+  },
+  "navigation": {
+    "borrowers": "For Shoppers",
+    "lenders": "For Lenders",
+    "pay": "Pay",
+    "charge": "Charge",
+    "borrow": "Borrow",
+    "lend": "Lend",
+    "manage": "Manage",
+    "toggleMenu": "Toggle Menu"
+  },
+  "merchants": {
+    "hero": {
+      "title": "Unlock More Sales... <br /> and Instant Cash Flow",
+      "subtitle": "Attract more customers with flexible payment options: digital MXN/USD and zero-interest installments. Get paid in seconds, no chargebacks, no hardware needed.",
+      "cta": "Start Selling More Today",
+      "promo": "(We are giving away our <plusLink>MXN$1200/year RapiMoni+ subscription for FREE</plusLink> to 100 merchants for 1 year, so don't miss it!)"
+    },
+    "features": [
+      {
+        "insight": "+30%",
+        "title": "More Sales, More Money",
+        "desc": "Attract new customers and increase average ticket size with flexible payment options (MXN/USD, or loans) they can actually use."
+      },
+      {
+        "insight": "+44%",
+        "title": "Keep the Cash Flowing",
+        "desc": "Get more revenue from existing customers, and keep them coming with affordable, fair and quick financing."
+      },
+      {
+        "insight": "<15s",
+        "title": "Instant Means Instant",
+        "desc": "Receive your money in seconds, not days. Improve your cash flow and manage your business more effectively."
+      }
+    ],
+    "partners": {
+      "title": "Powered by trusted technology:"
+    },
+    "bnpl": {
+      "title": "Boost Your Sales with Easy Zero-Interest Installments",
+      "customerTitle": "Flexible, Fair, and Simple for Your Customers",
+      "customerPoints": [
+        "No credit history needed, or complex KYC.",
+        "Instant approval with flexible terms (1-3 months).",
+        "Zero extra cost for them without hidden fees."
+      ],
+      "merchantTitle": "More Sales, Happier Customers, Zero Hassle for YOU",
+      "merchantPoints": [
+        "Activate installments with a single click – no complex setup.",
+        "Offer 1-3 month plans at 0% interest to your customers.",
+        "You get paid the full amount instantly, less a clear, upfront service fee of 3%."
+      ]
+    },
+    "howItWorks": {
+      "title": "As Simple as 1, 2, 3",
+      "steps": [
+        {
+          "title": "Generate Payment Link",
+          "desc": "In seconds, create a unique QR code or URL for any product. No POS hardware needed. We charge 1% fee per payment."
+        },
+        {
+          "title": "Customer Pays Their Way",
+          "desc": "Your customer scans and chooses: pay instantly with digital MXN/USD, or split the cost with a zero-interest RapiMoni loan (backed by their digital USD)."
+        },
+        {
+          "title": "Receive Funds Instantly",
+          "desc": "The payment settles in your wallet immediately. No more waiting days for bank transfers."
+        }
+      ]
+    },
+    "rapimoniPlus": {
+      "title": "Supercharge Your Business with RapiMoni+",
+      "benefitsTitle": "What are the benefits of RapiMoni+?",
+      "benefitsPoints": [
+        "The payment fee will be reduced by half (to just 0.5%).",
+        "You will be able to enable the microloan option for your products, increasing average ticket by 30% and getting +44% in recurring revenue."
+      ],
+      "costTitle": "How much does it cost?",
+      "costDesc": "It costs MXN$100 per month, MXN$1,200 per year."
+    },
+    "testimonials": {
+      "title": "What Our Merchants Are Saying",
+      "list": [
+        {
+          "quote": "Thanks to the 'buy now, pay later' option there is a 20% increase in sales from customers who previously didn't have credit cards.",
+          "name": "Ana Torres",
+          "title": "Owner, Artesanías del Sol"
+        },
+        {
+          "quote": "The best part is the instant settlement and no chargebacks. It's simplified my cash flow completely.",
+          "name": "Carlos Mendoza",
+          "title": "Manager, Café Rincón"
+        },
+        {
+          "quote": "Offering a 'buy now, pay later' option without the high fees of other platforms has made us much more competitive.",
+          "name": "Sofia Reyes",
+          "title": "Founder, Moda Urbana"
+        }
+      ]
+    }
+  },
+  "lenders": {
+    "hero": {
+      "title": "Earn Attractive, Stable Yields. <br /> Directly Empower LATAM Businesses.",
+      "subtitle": "Deposit your digital pesos (MXNe) into our audited lending pool. Earn competitive returns generated from real-world microloans to small businesses, not crypto speculation. Secure, transparent, impactful.",
+      "cta": "Explore Lending Opportunities"
+    },
+    "stats": {
+      "title": "Transparent Performance, Trusted Technology",
+      "subtitle": "Built on public, verifiable smart contracts on the secure Base network. We prioritize clarity and the safety of your funds.",
+      "tvl": "Current Total Value Locked (MXNe)",
+      "apy": "Target APY (Paid in MXNe)",
+      "uptime": "Protocol Uptime (Since Inception)",
+      "partnersTitle": "Powered by trusted technology:"
+    },
+    "why": {
+      "title": "A Smarter Way to Grow Your Capital & Make a Difference",
+      "points": [
+        {
+          "title": "Robust Security & Transparency",
+          "desc": "Your capital is secured in audited, on-chain smart contracts. All loans are fully collateralized with USDC, minimizing risk and maximizing transparency."
+        },
+        {
+          "title": "High, Real-World Yield",
+          "desc": "Earn an attractive APY derived from fees on essential microloans to growing businesses. A stable return, independent of crypto market volatility."
+        },
+        {
+          "title": "Invest with Impact",
+          "desc": "Your liquidity isn't just numbers; it's a lifeline for entrepreneurs in Latin America, fueling local economies and creating opportunities."
+        }
+      ]
+    },
+    "howItWorks": {
+      "title": "Start Earning in 3 Simple Steps",
+      "steps": [
+        {
+          "title": "Deposit Digital Pesos",
+          "desc": "Connect your compatible wallet and securely deposit your digital pesos into RapiMoni's audited lending pool on the blockchain."
+        },
+        {
+          "title": "Earn Passive Yield",
+          "desc": "Your capital is put to work immediately, generating yield from the collective fees of all microloans processed by the protocol. Real activity, real returns."
+        },
+        {
+          "title": "Track & Withdraw Freely",
+          "desc": "Monitor your accumulated earnings in real-time via your personal dashboard. Withdraw your initial capital and accrued yield in digital pesos as needed."
+        }
+      ]
+    },
+    "testimonials": {
+      "title": "What Our Lenders Are Saying",
+      "list": [
+        {
+          "quote": "The yield on RapiMoni is uncorrelated with the typical DeFi markets. It's a stable, real-world return that's hard to find elsewhere.",
+          "name": "Javier Vargas",
+          "title": "DeFi Analyst"
+        },
+        {
+          "quote": "As someone looking for stablecoin yields, RapiMoni is a top performer. The fact that it supports financial inclusion is a huge bonus.",
+          "name": "Elena Gomez",
+          "title": "Crypto Investor"
+        },
+        {
+          "quote": "The platform is transparent. I can see the smart contracts on-chain and track the pool's performance. That gives me confidence.",
+          "name": "Marco Diaz",
+          "title": "Liquidity Provider"
+        }
+      ]
+    }
+  },
+  "borrowers": {
+    "hero": {
+      "title": "Pay Your Way, Instantly. <br />Digital Cash or 0% Interest Plans.",
+      "subtitle": "Spotted a RapiMoni QR code? You're in luck. Pay now with digital pesos/dollars, or get an instant zero-interest loan. No credit card, no hidden fees, no hassle.",
+      "cta": "Find RapiMoni Stores"
+    },
+    "why": {
+      "title": "Unlock Smooth Shopping, Even Without a Credit Card",
+      "points": [
+        {
+          "title": "Total Payment Freedom",
+          "desc": "No credit card? No problem! Use digital MXN/USD, or opt for a 0% interest loan. Your choice, your control."
+        },
+        {
+          "title": "0% Interest Installments",
+          "desc": "Need that item now? Split your payment over 1-3 months. Absolutely no interest or hidden fees. Just provide digital USD as collateral, which you get back after repayment."
+        },
+        {
+          "title": "Safe, Secure, Simple",
+          "desc": "Transactions are lightning-fast and secured. Our collateral system is straightforward, ensuring your funds are safe."
+        }
+      ]
+    },
+    "howItWorks": {
+      "title": "Get What You Want in 3 Simple Steps",
+      "steps": [
+        {
+          "title": "Scan the Merchant's QR",
+          "desc": "At checkout, use your phone’s camera to instantly scan the RapiMoni QR code from the merchant."
+        },
+        {
+          "title": "Pick Your Payment",
+          "desc": "Your phone, your choice! Pay instantly with digital MXN/USD, or select 'Pay with BNPL Loan' for a 0% interest loan (requires digital USD collateral)."
+        },
+        {
+          "title": "Confirm & Enjoy!",
+          "desc": "Approve the payment or your collateral-backed loan in seconds. That's it – your purchase is complete!"
+        }
+      ]
+    },
+    "request": {
+      "title": "Want RapiMoni at Your Favorite Local Store?",
+      "desc": "If your go-to shop doesn't offer RapiMoni's easy payments yet, let them know! Tell them to check out <link>rapimoni.com</link> to see how they can boost their sales.",
+      "cta": "New stores are joining weekly! Sign up below to get updates for your city and be the first to know."
+    },
+    "testimonials": {
+      "title": "What Our Customers Are Saying",
+      "list": [
+        {
+          "quote": "I was able to buy the tools I needed for my new job without a credit card. RapiMoni made it possible. So simple!",
+          "name": "David Rojas",
+          "title": "Customer in Mexico City"
+        },
+        {
+          "quote": "Being able to split the payment for my new glasses over two months with zero interest was amazing. I wish every store had this.",
+          "name": "Laura Jimenez",
+          "title": "Student"
+        },
+        {
+          "quote": "It felt safe and transparent. I knew exactly what I was agreeing to, with no hidden fees. A great experience.",
+          "name": "Fernando Morales",
+          "title": "Graphic Designer"
+        }
+      ]
+    }
+  },
+  "leadForm": {
+    "merchant": {
+      "title": "Ready to Grow? Get Started with RapiMoni Now!",
+      "description": "Join our priority list for merchants! Fill out the form, and we'll guide you on boosting sales and simplifying payments with RapiMoni. Spots for the RapiMoni+ promo are limited!",
+      "cta": "Submit Info"
+    },
+    "lender": {
+      "title": "Ready to Earn with Impact? Join the RapiMoni Pool.",
+      "description": "Register your interest to be among the first to access our lending pool. Receive detailed information on protocol mechanics, security audits, and APY projections. Start putting your stablecoins to work for real-world growth.",
+      "cta": "Register Interest"
+    },
+    "borrower": {
+      "title": "Be the First to Shop Smarter!",
+      "description": "Love the sound of RapiMoni? Want easy payments and 0% interest loans? Leave your details, and we'll notify you as new partner stores arrive in your city!",
+      "cta": "Notify Me"
+    },
+    "placeholders": {
+      "fullName": "Full Name",
+      "email": "Email",
+      "city": "City",
+      "phone": "Phone Number",
+      "revenue": "Avg. Monthly Revenue (MXN$)",
+      "ticket": "Avg. Ticket Size (MXN$)",
+      "wallet": "Wallet Address (Optional)",
+      "deposit": "Intended Deposit (MXNe) (Optional)"
+    },
+    "errors": {
+      "fullName": "Full name is required.",
+      "email": "A valid email is required.",
+      "city": "City is required.",
+      "phoneRequired": "Phone number is required.",
+      "phoneMinLength": "Must be at least 8 digits.",
+      "revenue": "Revenue is required.",
+      "ticket": "Ticket size is required."
+    },
+    "toast": {
+      "success": "Thank you! Your information has been submitted.",
+      "error": "Something went wrong"
+    }
+  }
+}

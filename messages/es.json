@@ -1,0 +1,304 @@
+{
+  "metadata": {
+    "root": {
+      "title": "RapiMoni | Pagos con Pesos o Dólares y Microcréditos sin Intereses",
+      "description": "RapiMoni trae pagos con Pesos o Dólares y microcréditos sin intereses a LATAM. Potenciando compras, potenciándote a ti."
+    },
+    "merchants": {
+      "image": "/social/og-merchants-es.png",
+      "title": "RapiMoni para Comercios",
+      "description": "Aumenta tus ventas aceptando pagos digitales y ofreciendo planes de pago a meses sin intereses. Sin hardware, sin contracargos, liquidación al instante.",
+      "ogTitle": "Haz Crecer Tu Negocio con RapiMoni",
+      "ogDescription": "Atrae más clientes y mejora tu flujo de caja con pagos y microcréditos instantáneos y seguros con pesos y dólares digitales."
+    },
+    "borrowers": {
+      "image": "/social/og-borrowers-es.png",
+      "title": "Paga a Tu Manera con RapiMoni",
+      "description": "Paga completo o divide tu compra en pagos fáciles y sin intereses. Sin tarjeta de crédito, sin complicaciones. La forma inteligente de pagar.",
+      "ogTitle": "La Forma Inteligente de Pagar. Flexible, Justo y Simple.",
+      "ogDescription": "¿Viste un código QR de RapiMoni? Paga ahora con pesos/dólares digitales o divide tu compra en pagos fáciles y sin intereses."
+    },
+    "lenders": {
+      "image": "/social/og-lenders-es.png",
+      "title": "Obtén Altos Rendimientos con RapiMoni",
+      "description": "Provee liquidez para potenciar microcréditos sin intereses en América Latina y obtén un rendimiento estable y de baja volatilidad, pagado en stablecoins.",
+      "ogTitle": "Obtén Rendimientos Estables y Altos. Impulsa el Crecimiento del Mundo Real.",
+      "ogDescription": "Provee liquidez al pool auditado de RapiMoni y obtén un APY competitivo que proviene de la actividad económica del mundo real."
+    }
+  },
+  "navigation": {
+    "borrowers": "Para Compradores",
+    "lenders": "Para Prestamistas",
+    "pay": "Pagar",
+    "charge": "Cobrar",
+    "borrow": "Prestar",
+    "lend": "Invertir",
+    "manage": "Gestionar",
+    "toggleMenu": "Abrir/Cerrar Menu"
+  },
+  "merchants": {
+    "hero": {
+      "title": "Aumenta Tus Ventas<br />y Obtén Flujo de Caja Instantáneo",
+      "subtitle": "Atrae más clientes con opciones de pago flexibles: pesos/dólares digitales y mensualidades sin intereses(BNPL). Recibe tu dinero en segundos, sin contracargos, sin necesidad de hardware.",
+      "cta": "Empieza a Vender Más Hoy",
+      "promo": "(¡Estamos regalando nuestra <plusLink>suscripción RapiMoni+ de MXN$1200/año GRATIS</plusLink> a 100 comercios por 1 año, no te lo pierdas!)"
+    },
+    "features": [
+      {
+        "insight": "+30%",
+        "title": "Más Ventas, Más Dinero",
+        "desc": "Atrae nuevos clientes e incrementa el ticket promedio con opciones de pago flexibles (pesos, dólares, o préstamos) que realmente pueden usar."
+      },
+      {
+        "insight": "+44%",
+        "title": "Mantén el Flujo de Caja",
+        "desc": "Obtén más ingresos de tus clientes existentes y haz que regresen con financiamiento accesible, justo y rápido."
+      },
+      {
+        "insight": "<15s",
+        "title": "Instantáneo Significa Instantáneo",
+        "desc": "Recibe tu dinero en segundos, no en días. Mejora tu flujo de caja y administra tu negocio de manera más efectiva."
+      }
+    ],
+    "partners": {
+      "title": "Con la confianza de la mejor tecnología:"
+    },
+    "bnpl": {
+      "title": "Impulsa Tus Ventas con Facilidades de Pago Sin Intereses",
+      "customerTitle": "Flexible, Justo y Simple para Tus Clientes",
+      "customerPoints": [
+        "Sin necesidad de historial crediticio, ni KYC complejo.",
+        "Aprobación instantánea con plazos flexibles (1-3 meses).",
+        "Cero costo extra para ellos, sin comisiones ocultas."
+      ],
+      "merchantTitle": "Más Ventas, Clientes Felices, Cero Complicaciones para TI",
+      "merchantPoints": [
+        "Activa las mensualidades con un solo clic, sin configuraciones complejas.",
+        "Ofrece planes de 1 a 3 meses con 0% de interés a tus clientes.",
+        "Recibes el monto completo al instante, menos una tarifa de servicio clara del 3% y por adelantado."
+      ]
+    },
+    "howItWorks": {
+      "title": "Tan Simple como 1, 2, 3",
+      "steps": [
+        {
+          "title": "Genera un Link de Pago",
+          "desc": "En segundos, crea un código QR o URL único para cualquier producto. No necesitas hardware POS. Cobramos una comisión del 1% por pago."
+        },
+        {
+          "title": "El Cliente Paga a Su Manera",
+          "desc": "Tu cliente escanea y elige: pagar al instante con pesos/dólares digitales, o dividir el costo con un préstamo RapiMoni sin intereses (respaldado por sus dólares digitales)."
+        },
+        {
+          "title": "Recibe Fondos al Instante",
+          "desc": "El pago se liquida en tu billetera de inmediato. No más esperas de días por transferencias bancarias."
+        }
+      ]
+    },
+    "rapimoniPlus": {
+      "title": "Potencia Tu Negocio al Máximo con RapiMoni+",
+      "benefitsTitle": "¿Cuáles son los beneficios de RapiMoni+?",
+      "benefitsPoints": [
+        "La comisión por pago se reducirá a la mitad (a solo 0.5%).",
+        "Podrás habilitar la opción de microcrédito para tus productos, aumentando el ticket promedio en un 30% y obteniendo +44% en ingresos recurrentes."
+      ],
+      "costTitle": "¿Cuánto cuesta?",
+      "costDesc": "Cuesta MXN$100 al mes, MXN$1,200 al año."
+    },
+    "testimonials": {
+      "title": "Lo Que Dicen Nuestros Comercios",
+      "list": [
+        {
+          "quote": "Con la opción de 'compra ahora, paga después' hay unaumento de más del 20% en las ventas de clientes que antes no tenían tarjetas de crédito.",
+          "name": "Ana Torres",
+          "title": "Dueña, Artesanías del Sol"
+        },
+        {
+          "quote": "La mejor parte es la liquidación instantánea y sin contracargos. Ha simplificado mi flujo de caja por completo.",
+          "name": "Carlos Mendoza",
+          "title": "Gerente, Café Rincón"
+        },
+        {
+          "quote": "Ofrecer una opción de 'compra ahora, paga después' sin las altas comisiones de otras plataformas nos ha hecho mucho más competitivos.",
+          "name": "Sofía Reyes",
+          "title": "Fundadora, Moda Urbana"
+        }
+      ]
+    }
+  },
+  "lenders": {
+    "hero": {
+      "title": "Genera Rendimientos Altos, Estables. <br /> Mientras Empoderas Negocios en LATAM.",
+      "subtitle": "Deposita tus pesos digitales en nuestro pool de préstamos auditado. Obtén rendimientos competitivos generados por microcréditos a pequeñas empresas en el mundo real, no por especulación cripto. Seguro, transparente, impactante.",
+      "cta": "Explora Oportunidades de Inversión"
+    },
+    "stats": {
+      "title": "Rendimiento Transparente, Tecnología Confiable",
+      "subtitle": "Construido sobre contratos inteligentes públicos y verificables en la segura red Base. Priorizamos la claridad y la seguridad de tus fondos.",
+      "tvl": "Valor Total Bloqueado Actual (MXNe)",
+      "apy": "APY Objetivo (Pagado en MXNe)",
+      "uptime": "Tiempo de Actividad del Protocolo (Desde Inicio)",
+      "partnersTitle": "Con la confianza de la mejor tecnología:"
+    },
+    "why": {
+      "title": "Una Forma Más Inteligente de Crecer Tu Capital y Hacer la Diferencia",
+      "points": [
+        {
+          "title": "Seguridad Robusta y Transparencia",
+          "desc": "Tu capital está asegurado en contratos inteligentes auditados y en el blockchain. Todos los préstamos están completamente colateralizados con USDC, minimizando el riesgo y maximizando la transparencia."
+        },
+        {
+          "title": "Rendimiento Alto y Estable del Mundo Real",
+          "desc": "Obtén un APY atractivo derivado de las comisiones de microcréditos esenciales para empresas en crecimiento. Un retorno estable, independiente de la volatilidad del mercado cripto."
+        },
+        {
+          "title": "Invierte con Impacto en tu Comunidad",
+          "desc": "Tu liquidez no son solo números; es un salvavidas para emprendedores en América Latina, impulsando las economías locales y creando oportunidades."
+        }
+      ]
+    },
+    "howItWorks": {
+      "title": "Comienza a Ganar en 3 Simples Pasos",
+      "steps": [
+        {
+          "title": "Deposita Tus Pesos Digitales",
+          "desc": "Conecta tu billetera compatible y deposita de forma segura pesos digitales en el pool de préstamos auditado de RapiMoni en el blockchain."
+        },
+        {
+          "title": "Genera Rendimiento Pasivo",
+          "desc": "Tu capital se pone a trabajar de inmediato, generando rendimiento a partir de las comisiones colectivas de todos los microcréditos procesados por el protocolo. Actividad real, retornos reales."
+        },
+        {
+          "title": "Monitorea y Retira Libremente",
+          "desc": "Supervisa tus ganancias acumuladas en tiempo real a través de tu panel personal. Retira tu capital inicial y el rendimiento acumulado en pesos digitales según necesites."
+        }
+      ]
+    },
+    "testimonials": {
+      "title": "Lo Que Dicen Nuestros Inversionistas",
+      "list": [
+        {
+          "quote": "El rendimiento en RapiMoni no está correlacionado con los mercados DeFi típicos. Es un retorno estable del mundo real que es difícil de encontrar en otro lugar.",
+          "name": "Javier Vargas",
+          "title": "Analista DeFi"
+        },
+        {
+          "quote": "Como alguien que busca rendimientos en stablecoins, RapiMoni es de los mejores. El hecho de que apoye la inclusión financiera es un gran extra.",
+          "name": "Elena Gómez",
+          "title": "Inversionista Cripto"
+        },
+        {
+          "quote": "La plataforma es transparente. Puedo ver los contratos inteligentes en la cadena y seguir el rendimiento del pool. Eso me da confianza.",
+          "name": "Marco Díaz",
+          "title": "Proveedor de Liquidez"
+        }
+      ]
+    }
+  },
+  "borrowers": {
+    "hero": {
+      "title": "Paga a Tu Manera, al Instante. <br />Efectivo Digital o Créditos Sin Intereses.",
+      "subtitle": "¿Viste un código QR de RapiMoni? Estás de suerte. Paga ahora con pesos/dólares digitales, u obtén un préstamo instantáneo sin intereses. Sin tarjeta de crédito, sin comisiones ocultas, sin complicaciones.",
+      "cta": "Encuentra Tiendas RapiMoni"
+    },
+    "why": {
+      "title": "Desbloquea Compras Fluidas, Incluso Sin Tarjeta de Crédito",
+      "points": [
+        {
+          "title": "Libertad Total de Pago",
+          "desc": "¿Sin tarjeta de crédito? ¡No hay problema! Usa pesos o dólares digitales, u opta por un préstamo sin intereses. Tú eliges, tú controlas."
+        },
+        {
+          "title": "Mensualidades Sin Intereses",
+          "desc": "¿Necesitas ese artículo ahora? Divide tu pago en 1-3 meses. Absolutamente sin intereses ni comisiones ocultas. Solo proporciona dólares digitales como colateral, que recuperas después de pagar."
+        },
+        {
+          "title": "Seguro, Confiable, Simple",
+          "desc": "Las transacciones son ultra rápidas y seguras. Nuestro sistema de colateral es transparente, asegurando que tus fondos estén protegidos."
+        }
+      ]
+    },
+    "howItWorks": {
+      "title": "Consigue lo que Quieres en 3 Simples Pasos",
+      "steps": [
+        {
+          "title": "Escanea el QR del Comercio",
+          "desc": "Al pagar, usa la cámara de tu teléfono para escanear instantáneamente el código QR de RapiMoni del comerciante."
+        },
+        {
+          "title": "Elige Tu Pago",
+          "desc": "¡Tu teléfono, tu elección! Paga al instante con pesos o dólares digitales, o selecciona 'Pagar con Crédito BNPL' para un préstamo sin intereses (requiere colateral en dólares digitales)."
+        },
+        {
+          "title": "¡Confirma y Disfruta!",
+          "desc": "Aprueba el pago o tu préstamo respaldado por colateral en segundos. ¡Eso es todo – tu compra está completa!"
+        }
+      ]
+    },
+    "request": {
+      "title": "¿Quieres RapiMoni en Tu Tienda Local Favorita?",
+      "desc": "Si tu tienda habitual aún no ofrece los pagos fáciles de RapiMoni, ¡házselo saber! Diles que visiten <link>rapimoni.com</link> para ver cómo pueden aumentar sus ventas.",
+      "cta": "¡Nuevas tiendas se unen cada semana! Regístrate abajo para recibir actualizaciones de tu ciudad y ser el primero en enterarte."
+    },
+    "testimonials": {
+      "title": "Lo Que Dicen Nuestros Clientes",
+      "list": [
+        {
+          "quote": "Pude comprar las herramientas que necesitaba para mi nuevo trabajo sin una tarjeta de crédito. RapiMoni lo hizo posible. ¡Tan simple!",
+          "name": "David Rojas",
+          "title": "Cliente en Ciudad de México"
+        },
+        {
+          "quote": "Poder dividir el pago de mis lentes nuevos en dos meses sin intereses fue increíble. Ojalá todas las tiendas tuvieran esto.",
+          "name": "Laura Jiménez",
+          "title": "Estudiante"
+        },
+        {
+          "quote": "Se sintió seguro y transparente. Sabía exactamente lo que estaba aceptando, sin comisiones ocultas. Una gran experiencia.",
+          "name": "Fernando Morales",
+          "title": "Diseñador Gráfico"
+        }
+      ]
+    }
+  },
+  "leadForm": {
+    "merchant": {
+      "title": "¿Listo para Crecer? ¡Empieza con RapiMoni Ahora!",
+      "description": "¡Únete a nuestra lista prioritaria para comercios! Completa el formulario y te guiaremos para aumentar tus ventas y simplificar pagos con RapiMoni. ¡Los cupos para la promo RapiMoni+ son limitados!",
+      "cta": "Enviar Información"
+    },
+    "lender": {
+      "title": "¿Listo para Ganar con Impacto? Únete al Pool de RapiMoni.",
+      "description": "Registra tu interés para ser de los primeros en acceder a nuestro pool de liquidez. Recibe información detallada sobre la mecánica del protocolo, auditorías de seguridad y proyecciones de APY. Comienza a poner tus stablecoins a trabajar para el crecimiento del mundo real.",
+      "cta": "Registrar Interés"
+    },
+    "borrower": {
+      "title": "¡Sé el Primero en Comprar de Forma Más Inteligente!",
+      "description": "¿Te encanta RapiMoni? ¿Quieres pagos fáciles y préstamos sin intereses? Deja tus datos y te notificaremos cuando lleguen nuevas tiendas asociadas a tu ciudad.",
+      "cta": "Notifíquenme"
+    },
+    "placeholders": {
+      "fullName": "Nombre Completo",
+      "email": "Correo Electrónico",
+      "city": "Ciudad",
+      "phone": "Número de Teléfono",
+      "revenue": "Ingreso Mensual Promedio (MXN$)",
+      "ticket": "Ticket Promedio (MXN$)",
+      "wallet": "Dirección de Billetera (Opcional)",
+      "deposit": "Depósito Previsto (MXNe) (Opcional)"
+    },
+    "errors": {
+      "fullName": "El nombre completo es obligatorio.",
+      "email": "Se requiere un correo electrónico válido.",
+      "city": "La ciudad es obligatoria.",
+      "phoneRequired": "El número de teléfono es obligatorio.",
+      "phoneMinLength": "Debe tener al menos 8 dígitos.",
+      "revenue": "El ingreso es obligatorio.",
+      "ticket": "El tamaño del ticket es obligatorio."
+    },
+    "toast": {
+      "success": "¡Gracias! Tu información ha sido enviada.",
+      "error": "Algo salió mal"
+    }
+  }
+}

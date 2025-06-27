@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* custom resets / variables go below */
+:root {
+  --background-light: #0a0a0a;
+  --foreground-light: #ededed;
+  --background-dark: #0a0a0a;
+  --foreground-dark: #ededed;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: var(--background-light);
+    color: var(--foreground-light);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--background-dark);
+    color: var(--foreground-dark);
+  }
+}
