@@ -29,13 +29,11 @@ For checking the proof of deployment go to: [Proof of Deployment](#proof-of-depl
 ## Intro 
 RapiMoni is a DeFi platform built on Arbitrum, designed to bring seamless payments and zero-interest loans to underbanked communities in Latin America. With just a web browser and a wallet, merchants can generate QR codes or URL links to accept payments in local stablecoins—MXNb (pegged to MXN)— and users can choose to pay on the spot or tap into a Buy-Now-Pay-Later loan collateralized with USDT/USDC.
 
-Check RapiMoni out at: www.rapimoni.com
-
 ---
 
 ## Quick Demo  
 
-[▶️ View Demo on YouTube](https://www.rapimoni.com)
+[▶️ View Demo on YouTube](https://www.youtube.com)
 _Check out a quick walkthrough of QR/URL payments and microloan flows for Mexico._
 
 ---
