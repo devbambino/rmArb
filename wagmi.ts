@@ -1,5 +1,5 @@
 import { http, cookieStorage, createConfig, createStorage } from "wagmi";
-import { baseSepolia } from "wagmi/chains";
+import { arbitrumSepolia } from "wagmi/chains";
 import { coinbaseWallet, walletConnect} from "wagmi/connectors";
 //import { connectorsForWallets } from '@rainbow-me/rainbowkit';
 //import { injectedWallet } from '@rainbow-me/rainbowkit/wallets';
@@ -27,7 +27,7 @@ export const cbWalletConnector = coinbaseWallet({
 );*/
  
 export const config = createConfig({
-  chains: [baseSepolia],
+  chains: [arbitrumSepolia],
   // turn off injected provider discovery
   multiInjectedProviderDiscovery: false,
   connectors: [cbWalletConnector],//[wcWalletConnector],
@@ -36,7 +36,7 @@ export const config = createConfig({
   }),
   ssr: true,
   transports: {
-    [baseSepolia.id]: http(),
+    [arbitrumSepolia.id]: http(),
   },
 });
  

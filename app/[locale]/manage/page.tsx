@@ -15,13 +15,12 @@ import { trackEvent } from '@/lib/analytics';
 
 const MXN_ADDR = process.env.NEXT_PUBLIC_MXN_ADDRESS!;
 const USD_ADDR = process.env.NEXT_PUBLIC_USD_ADDRESS!;
-const COINBASE_OFF_RAMP_URL = process.env.NEXT_PUBLIC_COINBASE_OFFRAMP_URL!;
-const AERODROME_SWAP_MXNE_URL = process.env.NEXT_PUBLIC_AERODROME_SWAP_POOL_FROM_MXNE_URL!;
-const AERODROME_SWAP_USDC_URL = process.env.NEXT_PUBLIC_AERODROME_SWAP_POOL_TO_MXNE_URL!;
+const UNISWAP_SWAP_MXN_URL = process.env.NEXT_PUBLIC_UNISWAP_SWAP_POOL_FROM_MXN_URL!;
+const UNISWAP_SWAP_USD_URL = process.env.NEXT_PUBLIC_UNISWAP_SWAP_POOL_TO_MXN_URL!;
 
 export default function ManagePage() {
     const { showToast } = useToast();
-    const { address } = useAccount();
+    const { address, chain } = useAccount();
     const { connect } = useConnect();
 
     const { data: userBalanceInMXNData, refetch: getUserBalanceMXN, isLoading: isUserBalanceInMXNLoading } = useBalance({
@@ -53,7 +52,7 @@ export default function ManagePage() {
                         <div className="text-4xl mb-2">🇺🇸</div>
                         <span className="text-[#50e2c3]">You have</span>
                         <p className="text-2xl font-bold">{Number(userBalanceInUSDData?.formatted).toFixed(2)} USDC</p>
-                        <a href={`https://pay.coinbase.com/v3/sell/input?appId=58a3fa2e-617f-4198-81e7-096f5e498c00&partnerUserId=rapiMoniUser&addresses={"${address}":["base"]}&assets=["USDC"]&redirectUrl=https://www.rapimoni.com/manage`} target="_blank" className="p-4 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full">Withdraw To Bank</a>
+                        <a href={`https://pay.coinbase.com/v3/sell/input?appId=58a3fa2e-617f-4198-81e7-096f5e498c00&partnerUserId=rapiMoniUser&addresses={"${address}":["arbitrum"]}&assets=["USDC"]&redirectUrl=https://www.rapimoni.com/manage`} target="_blank" className="p-4 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full">Withdraw To Bank</a>
                         <br />
                     </div>
 
@@ -64,8 +63,7 @@ export default function ManagePage() {
                         <div className="text-4xl mb-2">🇲🇽</div>
                         <span className="text-[#50e2c3]">You have</span>
                         <p className="text-2xl font-bold ">{Number(userBalanceInMXNData?.formatted).toFixed(2)} MXNe</p>
-                        <a href={AERODROME_SWAP_MXNE_URL} target="_blank" className="p-4 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full">Swap to USDC</a>
-
+                        <a href={UNISWAP_SWAP_MXN_URL} target="_blank" className="p-4 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full">Swap to USDC</a>
                     </div>
 
                 </>
