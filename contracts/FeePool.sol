@@ -1,15 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "https://cdn.jsdelivr.net/npm/@openzeppelin/contracts@4.7.3/access/Ownable.sol";
+import "https://cdn.jsdelivr.net/npm/@openzeppelin/contracts@4.7.3/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/math/Math.sol";
 
 // IMPORTANT: LiquidityPool needs to expose a function to get totalAssets
 interface ILiquidityPool {
     function totalShares() external view returns (uint256);
     function shares(address user) external view returns (uint256);
-    // This is a new required function to get the total value of the pool
     function totalAssets() external view returns (uint256);
 }
 

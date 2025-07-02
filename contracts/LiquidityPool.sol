@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "https://cdn.jsdelivr.net/npm/@openzeppelin/contracts@4.7.3/access/Ownable.sol";
+import "https://cdn.jsdelivr.net/npm/@openzeppelin/contracts@4.7.3/token/ERC20/utils/SafeERC20.sol";
 
 interface IERC20Decimals is IERC20 {
     function decimals() external view returns (uint8);
@@ -26,21 +26,20 @@ contract LiquidityPool is Ownable, ReentrancyGuard {
     
     uint256 public totalShares;
     
-    // Simplified accounting: totalBalances is now totalAssets()
-    uint256 public totalBorrowed; // in asset tokens
-    uint256 public totalRepaid;   // in asset tokens
+    // FIX: These two variables are now crucial for calculating the true pool value.
+    uint256 public totalDisbursed; // Total asset tokens loaned out
+    uint256 public totalCollected; // Total asset tokens repaid or seized
     
     // Oracle and a Swapper needed for this in production
     // For now, manager can handle it
     address public swapper; 
-    
-    // Removed lock-in period for better UX. Can be added back with more robust logic if needed.
-    uint256 public loanTermUnit = 2628000; // 1 month in seconds (for reference)
 
     mapping(address => uint256) public shares;
 
     event Deposit(address indexed user, uint256 amount, uint256 sharesMinted);
     event Withdraw(address indexed user, uint256 amount, uint256 sharesBurned);
+    event Disburse(address indexed user, uint256 principal);
+    event Collect(address indexed user, uint256 paymentAmount);
     event SwappedCollateral(uint256 collateralIn, uint256 assetOut);
 
     constructor(address _usdc, address _token) {
@@ -48,11 +47,10 @@ contract LiquidityPool is Ownable, ReentrancyGuard {
         asset = IERC20Decimals(_token);
     }
     
-    function setup(address _manager, address _feePool, address _swapper, uint256 _loanTermUnit) public onlyOwner {
+    function setup(address _manager, address _feePool, address _swapper) public onlyOwner {
         manager = _manager;
         feePool = IFeePool(_feePool);
         swapper = _swapper;
-        loanTermUnit = _loanTermUnit;
     }
 
     modifier onlyManager() {
@@ -60,26 +58,24 @@ contract LiquidityPool is Ownable, ReentrancyGuard {
         _;
     }
 
-    /// @notice Returns the total amount of the underlying asset managed by the pool.
+    /// @notice The total value of the pool, including assets currently on loan.
     function totalAssets() public view returns (uint256) {
-        return asset.balanceOf(address(this));
+        // True value = liquid assets + loaned assets
+        return asset.balanceOf(address(this)) + (totalDisbursed - totalCollected);
     }
     
-    /// @notice Deposit tokens and receive shares
     function deposit(uint256 amount) external nonReentrant {
         require(amount > 0, "LP: Zero deposit");
-
-        // IMPORTANT: Update rewards BEFORE changing share balance
         feePool.beforeShareTransfer(msg.sender);
 
+        // FIX: The share calculation now uses the true total value of the pool.
         uint256 _totalAssets = totalAssets();
         uint256 _totalShares = totalShares;
         uint256 _shares;
 
         if (_totalShares == 0 || _totalAssets == 0) {
-            _shares = amount; // First deposit: 1 token = 1 share
+            _shares = amount;
         } else {
-            // Subsequent deposits: shares are proportional to pool value
             _shares = (amount * _totalShares) / _totalAssets;
         }
         
@@ -92,21 +88,19 @@ contract LiquidityPool is Ownable, ReentrancyGuard {
         emit Deposit(msg.sender, amount, _shares);
     }
 
-    /// @notice Withdraw assets by burning shares
     function withdraw(uint256 shareAmount) external nonReentrant {
-        require(shareAmount > 0, "LP: Zero shares");
         uint256 userShares = shares[msg.sender];
-        require(shareAmount <= userShares, "LP: Insufficient shares");
+        require(shareAmount > 0 && shareAmount <= userShares, "LP: Invalid or insufficient shares");
 
-        // IMPORTANT: Update rewards BEFORE changing share balance
         feePool.beforeShareTransfer(msg.sender);
         
-        uint256 _totalAssets = totalAssets();
-        uint256 _totalShares = totalShares;
-
-        // Calculate amount to withdraw based on share value
-        uint256 amountToWithdraw = (shareAmount * _totalAssets) / _totalShares;
-        require(amountToWithdraw <= _totalAssets, "LP: Not enough liquidity");
+        // FIX: Calculate the entitled amount based on the pool's true total value.
+        uint256 amountToWithdraw = (shareAmount * totalAssets()) / totalShares;
+        
+        // FIX: CRITICAL CHECK - ensure there are enough liquid assets to fulfill the withdrawal.
+        // If not, the tx reverts, but the user's shares are safe and still hold their full value.
+        // They can try again when utilization is lower.
+        require(asset.balanceOf(address(this)) >= amountToWithdraw, "LP: Not enough liquid assets available");
         
         shares[msg.sender] -= shareAmount;
         totalShares -= shareAmount;
@@ -118,18 +112,22 @@ contract LiquidityPool is Ownable, ReentrancyGuard {
     /// --- Functions Called by Manager ---
 
     function disburse(address user, address merchant, uint256 principalAmount, uint256 fee) external onlyManager {
-        require(principalAmount > 0, "LP: Zero principal");
-        require(totalAssets() >= principalAmount, "LP: Not enough liquidity");
+        require(asset.balanceOf(address(this)) >= principalAmount, "LP: Not enough liquidity");
 
         asset.safeTransfer(merchant, principalAmount - fee);
-        asset.safeTransfer(manager, fee); // Send fee to Manager, which routes it to FeePool
-        totalBorrowed += principalAmount;
+        asset.safeTransfer(manager, fee);
+        
+        // FIX: Track total disbursed amount.
+        totalDisbursed += principalAmount;
+        emit Disburse(user, principalAmount);
     }
 
+
     function collect(address user, uint256 paymentAmount) external onlyManager {
-        // Manager ensures user has approved this contract to spend 'asset'
         asset.safeTransferFrom(user, address(this), paymentAmount);
-        totalRepaid += paymentAmount;
+        // FIX: Track total collected amount.
+        totalCollected += paymentAmount;
+        emit Collect(user, paymentAmount);
     }
 
     function receiveSeizedCollateral(address user, uint256 seizedCollateral) external onlyManager {

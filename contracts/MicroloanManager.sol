@@ -2,9 +2,8 @@
 pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "https://cdn.jsdelivr.net/npm/@openzeppelin/contracts@4.7.3/access/Ownable.sol";
+import "https://cdn.jsdelivr.net/npm/@openzeppelin/contracts@4.7.3/token/ERC20/utils/SafeERC20.sol";
 
 
 // --- FOR PRODUCTION ---
@@ -43,6 +42,12 @@ contract MicroloanManager is Ownable, ReentrancyGuard {
     uint256 public assetPriceInUsd;
 
     uint256 public loanTermUnit; // in seconds
+    /*enum LoanTermUnit {
+        60,//1 min
+        3600,// 1 hour
+        86400,// 1 day
+        2628000,// 1 month
+    }*/
     mapping(address => Loan) public loans;
 
     struct Loan {
@@ -51,7 +56,7 @@ contract MicroloanManager is Ownable, ReentrancyGuard {
         uint256 fee;            // total fee
         uint256 startTime;
         uint256 term;           // in seconds
-        uint256 termInPeriods;
+        uint8 termInPeriods;
         uint256 pendingPayments;
         uint256 paid;
         bool    active;
@@ -75,7 +80,7 @@ contract MicroloanManager is Ownable, ReentrancyGuard {
         assetPriceInUsd = _initialAssetPrice;
         // In production: priceFeed = AggregatorV3Interface(chainlinkFeedAddress);
     }
-    
+
     function setLoanTermUnit(uint256 _loanTermUnit) public onlyOwner {
         loanTermUnit = _loanTermUnit;
     }
@@ -137,6 +142,7 @@ contract MicroloanManager is Ownable, ReentrancyGuard {
         if (loan.paid >= loan.principal) {
             // Fully repaid: return all collateral
             usdc.safeTransfer(msg.sender, loan.collateral);
+            loan.pendingPayments = 0;
             loan.active = false;
         }
         emit Repaid(msg.sender, paymentAmount);

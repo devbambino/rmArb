@@ -303,7 +303,7 @@ export default function PayPage() {
                 args: [
                     parseUnits(collateralAmountUSD.toFixed(usdDecimals), usdDecimals), // Collateral in USD (smallest unit)
                     parseUnits(loanAmountMerchantToken.toFixed(merchantTokenDecimals), merchantTokenDecimals), // Loan amount in Merchant Token (smallest unit)
-                    BigInt(loanTerm), // Loan term (e.g., in days, ensure it's a whole number)
+                    BigInt(loanTerm), // Loan term (e.g., in days, ensure it's a whole number) switched from uint256 to uint8
                     merchant as `0x${string}` // Merchant address to pay
                 ],
             }).catch(err => {
