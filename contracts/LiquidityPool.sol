@@ -26,6 +26,7 @@ contract LiquidityPool is Ownable {
     IMicroloanManager public loanPool;
     IERC20Decimals public immutable usdc;
     IERC20Decimals public immutable asset;   // e.g., MXNb
+    uint8 public maxTerm = 3;//3 term units by default
     uint256 public totalShares;
     uint256 public totalBorrowed;
     uint256 public totalRepaid;
@@ -65,13 +66,18 @@ contract LiquidityPool is Ownable {
         feePool = _feePool;
         manager = _loanPool;
         loanTermUnit = loanPool.loanTermUnit();
-        lockedInPeriod = loanTermUnit * 6;
+        lockedInPeriod = loanTermUnit * maxTerm;
         swapper = _swapper;
     }
 
     function changeTermUnit() public onlyOwner {
         loanTermUnit = loanPool.loanTermUnit();
-        lockedInPeriod = loanTermUnit * 6;
+        lockedInPeriod = loanTermUnit * maxTerm;
+    }
+
+    function changeMaxTerm(uint8 newMaxTerm) public onlyOwner {
+        maxTerm = newMaxTerm;
+        lockedInPeriod = loanTermUnit * newMaxTerm;
     }
 
     function deposit(uint256 amount) external {
