@@ -193,25 +193,6 @@ export const liquidityPoolAbi = [
 		"type": "event"
 	},
 	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "shareAmount",
-				"type": "uint256"
-			}
-		],
-		"name": "WithdrawalRequested",
-		"type": "event"
-	},
-	{
 		"inputs": [],
 		"name": "asset",
 		"outputs": [
@@ -233,25 +214,6 @@ export const liquidityPoolAbi = [
 			}
 		],
 		"name": "balanceOf",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "balances",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -298,6 +260,19 @@ export const liquidityPoolAbi = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "newMaxTerm",
+				"type": "uint8"
+			}
+		],
+		"name": "changeMaxTerm",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -485,6 +460,19 @@ export const liquidityPoolAbi = [
 	},
 	{
 		"inputs": [],
+		"name": "maxTerm",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "owner",
 		"outputs": [
 			{
@@ -563,6 +551,11 @@ export const liquidityPoolAbi = [
 				"internalType": "address",
 				"name": "_feePool",
 				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_swapper",
+				"type": "address"
 			}
 		],
 		"name": "setupManagement",
@@ -591,12 +584,12 @@ export const liquidityPoolAbi = [
 	},
 	{
 		"inputs": [],
-		"name": "totalBalances",
+		"name": "swapper",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "address",
 				"name": "",
-				"type": "uint256"
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -668,19 +661,6 @@ export const liquidityPoolAbi = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "totalWithdrawalRequested",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -731,25 +711,6 @@ export const liquidityPoolAbi = [
 		"name": "withdrawAll",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "withdrawalRequested",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	}
 ] as const;

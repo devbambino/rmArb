@@ -20,6 +20,11 @@ export const microloanAbi = [
 				"internalType": "uint256",
 				"name": "_loanTermUnit",
 				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_initialAssetPrice",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -42,6 +47,19 @@ export const microloanAbi = [
 			}
 		],
 		"name": "CollateralWithdrawed",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "newRateBps",
+				"type": "uint256"
+			}
+		],
+		"name": "FeeRateChanged",
 		"type": "event"
 	},
 	{
@@ -145,6 +163,32 @@ export const microloanAbi = [
 		"type": "event"
 	},
 	{
+		"inputs": [],
+		"name": "PRICE_PRECISION",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "assetPriceInUsd",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -242,6 +286,19 @@ export const microloanAbi = [
 	},
 	{
 		"inputs": [],
+		"name": "feeRateBps",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "getCurrentTimestamp",
 		"outputs": [
 			{
@@ -259,11 +316,6 @@ export const microloanAbi = [
 				"internalType": "address",
 				"name": "user",
 				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "usdInAsset",
-				"type": "uint256"
 			}
 		],
 		"name": "liquidate",
@@ -418,6 +470,32 @@ export const microloanAbi = [
 			}
 		],
 		"name": "repay",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_newPrice",
+				"type": "uint256"
+			}
+		],
+		"name": "setAssetPrice",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_newFeeRateBps",
+				"type": "uint256"
+			}
+		],
+		"name": "setFeeRateBps",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
