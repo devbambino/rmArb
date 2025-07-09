@@ -20,7 +20,7 @@ const UNISWAP_SWAP_USD_URL = process.env.NEXT_PUBLIC_UNISWAP_SWAP_POOL_TO_MXN_UR
 
 export default function ManagePage() {
     const { showToast } = useToast();
-    const { address, chain } = useAccount();
+    const { address } = useAccount();
     const { connect } = useConnect();
 
     const { data: userBalanceInMXNData, refetch: getUserBalanceMXN, isLoading: isUserBalanceInMXNLoading } = useBalance({
@@ -62,7 +62,7 @@ export default function ManagePage() {
                         <div className="h-1 w-16 bg-[#264C73] mx-auto rounded mb-6" />
                         <div className="text-4xl mb-2">🇲🇽</div>
                         <span className="text-[#50e2c3]">You have</span>
-                        <p className="text-2xl font-bold ">{Number(userBalanceInMXNData?.formatted).toFixed(2)} MXNe</p>
+                        <p className="text-2xl font-bold ">{Number(userBalanceInMXNData?.formatted).toFixed(2)} MXNb</p>
                         <a href={UNISWAP_SWAP_MXN_URL} target="_blank" className="p-4 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full">Swap to USDC</a>
                     </div>
 
