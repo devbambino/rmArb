@@ -12,6 +12,8 @@
     "@coinbase/onchainkit": "^0.38.10",
     "@coinbase/wallet-sdk": "^4.3.2",
     "@heroicons/react": "^2.2.0",
+    "@privy-io/react-auth": "^2.17.3",
+    "@privy-io/wagmi": "^1.0.5",
     "@radix-ui/react-alert-dialog": "^1.1.13",
     "@radix-ui/react-dialog": "^1.1.13",
     "@radix-ui/react-slot": "^1.2.2",

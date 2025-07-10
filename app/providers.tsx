@@ -3,11 +3,17 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, type ReactNode } from "react";
-import { WagmiProvider } from "wagmi";
+//import { WagmiProvider } from "wagmi";
+import { WagmiProvider } from '@privy-io/wagmi';
+import { PrivyProvider } from '@privy-io/react-auth';
 import Layout from "@/components/Layout";
 import { config } from "@/wagmi";
+import { privyConfig } from "@/privyConfig";
 import { ToastProvider } from '@/components/ui/toastprovider';
 import { NextIntlClientProvider, AbstractIntlMessages } from 'next-intl'; // ADDED
+
+//const [queryClient] = useState(() => new QueryClient());
+const queryClient = new QueryClient();
 
 // MODIFIED: Update props to accept locale and messages
 export function Providers({
@@ -19,18 +25,18 @@ export function Providers({
   locale: string;
   messages: AbstractIntlMessages;
 }) {
-  const [queryClient] = useState(() => new QueryClient());
-
   return (
     // ADDED: The provider that gives context to all client components
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <WagmiProvider config={config}>
+      <PrivyProvider appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID!} config={privyConfig}>
         <QueryClientProvider client={queryClient}>
-          <Layout>
-            <ToastProvider>{children}</ToastProvider>
-          </Layout>
+          <WagmiProvider config={config}>
+            <Layout>
+              <ToastProvider>{children}</ToastProvider>
+            </Layout>
+          </WagmiProvider>
         </QueryClientProvider>
-      </WagmiProvider>
+      </PrivyProvider>
     </NextIntlClientProvider>
   );
 }

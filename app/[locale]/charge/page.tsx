@@ -4,11 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import QRCodeStyling from "qr-code-styling";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useAccount,useConnect } from "wagmi";
+import { useAccount, useConnect } from "wagmi";
 import { useToast } from "@/components/ui/toastprovider";
-import { cbWalletConnector } from "@/wagmi";
 import { Wallet } from "lucide-react";
 import { trackEvent } from '@/lib/analytics';
+import { usePrivy } from '@privy-io/react-auth';
+import { LoginButton } from '@/components/LoginButton';
 
 const USDTokenAddress = process.env.NEXT_PUBLIC_USD_ADDRESS; // Testnet
 const MXNTokenAddress = process.env.NEXT_PUBLIC_MXN_ADDRESS; // Testnet
@@ -17,7 +18,8 @@ const rate = Number(process.env.NEXT_PUBLIC_RAPIMONI_FEE); // Fee rate charged b
 
 export default function ChargePage() {
     const [mounted, setMounted] = useState(false);
-    const { connect } = useConnect();
+    //const { connect } = useConnect();
+    const { ready, authenticated } = usePrivy();
     const { address } = useAccount();
     const [amount, setAmount] = useState("");
     const [token, setToken] = useState("mxn");
@@ -129,7 +131,7 @@ export default function ChargePage() {
             <div className="w-full max-w-md mx-auto p-8 border border-[#264C73] rounded-lg shadow-lg space-y-6 text-center">
                 <h2 className="text-2xl font-semibold mb-2">Payment Details</h2>
                 <div className="h-1 w-16 bg-[#264C73] mx-auto rounded mb-6" />
-                {mounted && address ? (
+                {mounted && ready && authenticated ? (
                     <>
                         {/* Grouped Card for Inputs */}
                         <div className="p-6 space-y-4 mb-4">
@@ -226,18 +228,12 @@ export default function ChargePage() {
                         <p className="text-lg text-gray-500">
                             Please connect your wallet to generate the payment QR code.
                         </p>
-                        <Button
-                            onClick={() => {
-                                connect({ connector: cbWalletConnector });
-                                handleWalletConnectClick('wallet_connect');
-                            }}
-                            variant="gradient"
+                        <LoginButton
                             size="xl"
                             className="flex items-center mx-auto py-2 px-4 gap-1.5 mt-8 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full"
                         >
-                            <Wallet className="h-4 w-4 text-[#50e2c3] hover:text-gray-900" />
                             Get Started
-                        </Button>
+                        </LoginButton>
                     </div>
                 )}
 

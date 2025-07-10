@@ -7,12 +7,14 @@ import Link from 'next/link';
 import LocaleSwitcher from './LocaleSwitcher';
 import { useTranslations } from 'next-intl';
 import { trackEvent } from '@/lib/analytics';
+import { usePrivy } from '@privy-io/react-auth';
 
 import logo from '@/public/logo-sm.png';
 
 export default function Header() {
     const [isOpen, setOpen] = useState(false);
     const account = useAccount();
+    const { ready, authenticated } = usePrivy();
 
     const t = useTranslations('navigation');
 
@@ -46,7 +48,7 @@ export default function Header() {
                 </Link>
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex space-x-6 text-white">
-                    {account.status === "connected" ? (
+                    {ready && authenticated ? (
                         loggedInLinks.map(link => (
                             <Link key={link.key} href={link.href} className="hover:underline hover:text-[#50e2c3]"
                                 onClick={() => handleNavigationClick('header_' + link.key)}>
@@ -83,7 +85,7 @@ export default function Header() {
             {/* Mobile Nav */}
             {isOpen && (
                 <nav className="md:hidden bg-primary/90 px-4 py-2 space-y-2">
-                    {account.status === "connected" ? (
+                    {ready && authenticated ? (
                         loggedInLinks.map((link) => (
                             <Link
                                 key={link.key}

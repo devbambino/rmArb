@@ -9,9 +9,12 @@ import { parseUnits, formatUnits, decodeEventLog } from 'viem';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/toastprovider";
-import { cbWalletConnector } from "@/wagmi";
 import { Wallet } from "lucide-react";
 import { trackEvent } from '@/lib/analytics';
+
+
+import { usePrivy } from '@privy-io/react-auth';
+import { LoginButton } from '@/components/LoginButton';
 
 const MXN_ADDR = process.env.NEXT_PUBLIC_MXN_ADDRESS!;
 const USD_ADDR = process.env.NEXT_PUBLIC_USD_ADDRESS!;
@@ -22,6 +25,7 @@ export default function ManagePage() {
     const { showToast } = useToast();
     const { address } = useAccount();
     const { connect } = useConnect();
+    const { ready, authenticated } = usePrivy();
 
     const { data: userBalanceInMXNData, refetch: getUserBalanceMXN, isLoading: isUserBalanceInMXNLoading } = useBalance({
         address,
@@ -43,7 +47,7 @@ export default function ManagePage() {
     return (
         <div className="min-h-screen text-white flex flex-col items-center px-4 py-12">
             <h1 className="text-3xl font-bold mt-6 mb-6">Manage Now</h1>
-            {address ? (
+            {ready && authenticated ? (
                 <>
                     {/* USDC section */}
                     <div className="w-full max-w-md mx-auto mt-6 mb-6 p-8 border border-[#264C73] rounded-lg space-y-6 text-center relative">
@@ -72,18 +76,12 @@ export default function ManagePage() {
                     <p className="text-lg text-gray-500">
                         Please connect your wallet to start managing it.
                     </p>
-                    <Button
-                        onClick={() => {
-                            connect({ connector: cbWalletConnector });
-                            handleWalletConnectClick('wallet_connect');
-                        }}
-                        variant="gradient"
+                    <LoginButton
                         size="xl"
                         className="flex items-center mx-auto py-2 px-4 gap-1.5 mt-8 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full"
                     >
-                        <Wallet className="mx-auto h-4 w-4 text-[#50e2c3] hover:text-gray-900" />
                         Get Started
-                    </Button>
+                    </LoginButton>
                 </div>
             )}
         </div>

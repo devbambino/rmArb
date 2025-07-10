@@ -6,6 +6,8 @@ import {
   CreditCardIcon, BuildingLibraryIcon, QrCodeIcon, BanknotesIcon, Cog6ToothIcon
 } from '@heroicons/react/24/outline';
 
+import { usePrivy } from '@privy-io/react-auth';
+
 const tabs = [
   { href: '/pay', icon: CreditCardIcon, label: 'Pay' },
   { href: '/charge', icon: QrCodeIcon, label: 'Charge' },
@@ -17,6 +19,7 @@ const tabs = [
 export default function TabBar() {
   const router = useRouter();
   const account = useAccount();
+  const { ready, authenticated } = usePrivy();
   const pathname = usePathname()
 
   const handleNavigationClick = (buttonName: string) => {
@@ -29,7 +32,7 @@ export default function TabBar() {
 
   return (
     <div>
-      {account.status === "connected" && (
+      {ready && authenticated && (
         <nav className="fixed bottom-0 w-full bg-primary/95 backdrop-blur-sm border-t border-primary/70 md:hidden">
 
           <ul className="flex justify-around py-2">

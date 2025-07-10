@@ -9,12 +9,14 @@ import { usdcAbi } from "@/lib/usdc-abi";
 import { microloanAbi } from "@/lib/microloan-abi";
 import { useWriteContracts } from 'wagmi/experimental';
 import { parseUnits, formatUnits } from 'viem';
-import { cbWalletConnector } from "@/wagmi";
 import { Wallet } from "lucide-react";
 import { trackEvent } from '@/lib/analytics';
 //import chainlinkUsdMxnAbi from '@/lib/chainlink-usd-mxn-abi.json';
 
-const rate = Number(process.env.NEXT_PUBLIC_RAPIMONI_FEE)/100; // Fee rate charged per payment
+import { usePrivy } from '@privy-io/react-auth';
+import { LoginButton } from '@/components/LoginButton';
+
+const rate = Number(process.env.NEXT_PUBLIC_RAPIMONI_FEE) / 100; // Fee rate charged per payment
 const rapiMoniAddress = process.env.NEXT_PUBLIC_RAPIMONI_WALLET; // wallet address for collecting fees
 const COLLATERAL_RATIO = 1.2; // collateral should be 120% of the product price
 const USD_MXN_FEED = process.env.NEXT_PUBLIC_CHAINLINK_USD_MXN_FEED!;
@@ -47,7 +49,8 @@ const getTokenDecimals = (tokenSymbol: string) => {
 export default function PayPage() {
     const { showToast } = useToast();
     const { address } = useAccount();
-    const { connect } = useConnect();
+    //const { connect } = useConnect();
+    const { ready, authenticated } = usePrivy();
     const fxRate = 19.48;//useUsdMxnRate(); 1 USD is X MXN
     const { writeContractsAsync } = useWriteContracts();
     const { writeContractAsync } = useWriteContract();
@@ -106,7 +109,7 @@ export default function PayPage() {
             buttonName        // Label (which button was clicked)
         );
     };
-    
+
     // Load payload from URL if present
     useEffect(() => {
         if (typeof window !== "undefined" && !payload) {
@@ -171,20 +174,22 @@ export default function PayPage() {
         //console.log("handlePayDirectWithMerchantToken fee:",fee," amountToMerchant:",amountToMerchant)
 
         try {
-            const hashPay = await writeContractsAsync({contracts: [
-                {
-                    address: merchantTokenAddress as `0x${string}`,
-                    abi: usdcAbi, 
-                    functionName: 'transfer',
-                    args: [merchant as `0x${string}`, amountToMerchant],
-                },
-                {
-                    abi: usdcAbi, 
-                    address: merchantTokenAddress as `0x${string}`,
-                    functionName: 'transfer',
-                    args: [rapiMoniAddress! as `0x${string}`, fee],
-                }
-            ]});
+            const hashPay = await writeContractsAsync({
+                contracts: [
+                    {
+                        address: merchantTokenAddress as `0x${string}`,
+                        abi: usdcAbi,
+                        functionName: 'transfer',
+                        args: [merchant as `0x${string}`, amountToMerchant],
+                    },
+                    {
+                        abi: usdcAbi,
+                        address: merchantTokenAddress as `0x${string}`,
+                        functionName: 'transfer',
+                        args: [rapiMoniAddress! as `0x${string}`, fee],
+                    }
+                ]
+            });
             setTxHash(hashPay.id);
             setStep("done");
             setIsBnplPaymentDone(false);
@@ -355,7 +360,7 @@ export default function PayPage() {
     return (
         <div className="min-h-screen text-white flex flex-col items-center px-4 py-12">
             <h1 className="text-3xl font-bold mt-6 mb-6">Pay Now</h1>
-            {address ? (
+            {ready && authenticated ? (
                 <>
                     <div className="w-full max-w-md mx-auto p-8 border border-[#264C73] rounded-lg space-y-6 text-center relative">
                         {isProcessing && (
@@ -490,18 +495,12 @@ export default function PayPage() {
                     <p className="text-lg text-gray-500">
                         Please connect your wallet to scan the QR code and pay.
                     </p>
-                    <Button
-                        onClick={() => {
-                            connect({ connector: cbWalletConnector });
-                            handleWalletConnectClick('wallet_connect');
-                        }}
-                        variant="gradient"
+                    <LoginButton
                         size="xl"
                         className="flex items-center mx-auto py-2 px-4 gap-1.5 mt-8 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full"
                     >
-                        <Wallet className="h-4 w-4 text-[#50e2c3] hover:text-gray-900" />
                         Get Started
-                    </Button>
+                    </LoginButton>
                 </div>
             )}
         </div>
