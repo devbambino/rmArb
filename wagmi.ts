@@ -9,6 +9,7 @@ const projectId = process.env.NEXT_PUBLIC_WC_PROJECT_ID!;
 export const cbWalletConnector = coinbaseWallet({
   appName: "RapiMoni",
   preference: "all",
+  jsonRpcUrl: arbitrumSepolia.rpcUrls.default.http[0],
 });
 
 //export const wcWalletConnector = walletConnect({projectId});
