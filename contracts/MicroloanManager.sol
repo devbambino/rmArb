@@ -30,8 +30,8 @@ contract MicroloanManager is Ownable, ReentrancyGuard {
     using SafeERC20 for IERC20Decimals;
 
     IERC20Decimals public immutable usdc;
-    ILiquidityPool public immutable liquidityPool;
-    IFeePool public immutable feePool;
+    ILiquidityPool public liquidityPool;
+    IFeePool public feePool;
     uint256 public loanTermUnit = 2628000; // in secs, by default 1 month
     /*enum LoanTermUnit {
         60,//1 min
@@ -90,6 +90,11 @@ contract MicroloanManager is Ownable, ReentrancyGuard {
         loanTermUnit = _loanTermUnit;
         assetPriceInUsd = _initialAssetPrice;
         // In production: priceFeed = AggregatorV3Interface(chainlinkFeedAddress);
+    }
+
+    function setupContracts(address _liquidityPool,address _feePool) public onlyOwner {
+        liquidityPool = ILiquidityPool(_liquidityPool);
+        feePool = IFeePool(_feePool);
     }
 
     function changeTermUnit(uint256 _loanTermUnit) public onlyOwner {
@@ -161,6 +166,7 @@ contract MicroloanManager is Ownable, ReentrancyGuard {
         }
 
         if (loan.paid >= loan.principal) {
+            require(usdc.balanceOf(address(this)) >= loan.collateral, "Not enough collateral liquidity in loan pool");
             usdc.safeTransfer(msg.sender, loan.collateral);
             collateral[msg.sender] = 0;
             totalCollateral -= loan.collateral;
@@ -170,7 +176,7 @@ contract MicroloanManager is Ownable, ReentrancyGuard {
         emit Repaid(msg.sender, paymentAmount, loan.pendingPayments);
     }
 
-    function liquidate(address user, uint256 usdInAsset) external onlyOwner nonReentrant {
+    function liquidate(address user) external onlyOwner nonReentrant {
         Loan storage loan = loans[user];
         require(loan.active, "No active loan");
         require(block.timestamp > loan.startTime + loan.term, "Not overdue");

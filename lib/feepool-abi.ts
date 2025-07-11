@@ -1,3 +1,4 @@
+
 export const feePoolAbi = [
 	{
 		"inputs": [
@@ -318,19 +319,6 @@ export const feePoolAbi = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "totalFees",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -367,6 +355,19 @@ export const feePoolAbi = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "updateDebt",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{

@@ -63,7 +63,7 @@ export default function LendPage() {
         functionName: 'earned',
         args: [address!],
         query: {
-            enabled: !!address && !!userShares && userShares > 0,
+            enabled: !!address, // Always check for rewards if user is connected
             refetchInterval: 30000, // Refetch every 30 seconds
         }
     });
@@ -197,6 +197,7 @@ export default function LendPage() {
     const poolBalanceNum = Number(poolBalanceInMXNData?.value ?? 0);
     const utilizationRatio = totalSharesNum > 0 ? (100 - (100 * poolBalanceNum / totalSharesNum)) : 0;
     const canClaim = userEarnedFees && userEarnedFees > BigInt(0);
+    const hasShares = userShares && userShares > 0 ? true: false;
 
     return (
         <div className="min-h-screen text-white flex flex-col items-center px-4 py-12">
@@ -225,7 +226,7 @@ export default function LendPage() {
                         <span className="text-[#50e2c3]">Target APY</span>
                         <p className="text-xl">~{estimatedAPY}%</p>
 
-                        {(userShares ?? BigInt(0)) > 0 && (
+                        {hasShares && (
                             <Button onClick={onWithdraw} disabled={withdrawIsPending || withdrawConfirming} className="mt-2 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full">{withdrawIsPending || withdrawConfirming ? "Withdrawing…" : "Withdraw"}</Button>
                         )}
                     </div>
@@ -251,7 +252,7 @@ export default function LendPage() {
                         <p className="text-sm text-gray-400">(You have {userBalanceInMXNData?.formatted ?? '0.00'} MXNb)</p>
                     </div>
 
-                    {(userShares ?? BigInt(0)) > 0 && (
+                    {(hasShares || canClaim) && (
                         <div className="w-full max-w-md mx-auto mt-6 mb-6 p-8 border border-[#264C73] rounded-lg space-y-6 text-center relative">
                             {claimConfirming && (
                                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-60 z-10 rounded-lg">

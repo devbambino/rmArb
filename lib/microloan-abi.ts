@@ -1,3 +1,4 @@
+
 export const microloanAbi = [
 	{
 		"inputs": [
@@ -496,6 +497,24 @@ export const microloanAbi = [
 			}
 		],
 		"name": "setFeeRateBps",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_liquidityPool",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_feePool",
+				"type": "address"
+			}
+		],
+		"name": "setupContracts",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"

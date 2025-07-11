@@ -19,7 +19,6 @@ contract FeePool is Ownable {
     address public treasury;
 
     uint256 public treasuryRate = 10; // 10% of all claimable fees
-    uint256 public totalFees;
     uint256 public claimableFees; // Total fees available for users
 
     // --- NEW: Fee-per-share distribution variables ---
@@ -51,7 +50,7 @@ contract FeePool is Ownable {
     /// @notice Collect loan fees from customer's purchase payment
     function collectFee(uint256 amount) external onlyManager {
         require(amount > 0, "Zero fee");
-        totalFees += amount;
+        //totalFees += amount;
         emit FeeCollected(amount);
     }
 
@@ -60,6 +59,7 @@ contract FeePool is Ownable {
         require(accruedFee > 0, "Zero accruedFee");
         // compute treasury cut
         uint256 treasuryCut = (accruedFee * treasuryRate) / 100;
+        require(asset.balanceOf(address(this)) >= treasuryCut, "Not enough liquidity in the fee pool for treasury fee");
         asset.safeTransfer(treasury, treasuryCut);
         // [4.1] Emit the actual amount sent to treasury
         emit FeeTransferredTreasury(treasuryCut);
@@ -77,46 +77,54 @@ contract FeePool is Ownable {
     }
 
     /// @notice Calculates pending rewards for a user.
-    /// @param _user The address of the user.
-    /// @return The amount of rewards earned.
     function earned(address _user) public view returns (uint256) {
         uint256 userShares = liquidityPool.shares(_user);
-        return (userShares * accFeePerShare) / 1e18 - rewardDebt[_user] + rewards[_user];
+        uint256 newAccruedValue = (userShares * accFeePerShare);
+        uint256 debt = rewardDebt[_user];
+        uint256 newlyEarned;
+        
+        // This check prevents underflow for new depositors
+        if(newAccruedValue >= debt) {
+            newlyEarned = (newAccruedValue - debt) / 1e18;
+        }
+
+        return rewards[_user] + newlyEarned;
     }
 
     /// @notice Updates a user's reward balance.
     /// This function should be called by the LiquidityPool before a user's shares change.
     function updateReward(address _user) external {
         require(msg.sender == address(liquidityPool), "Not LiquidityPool");
-        uint256 userShares = liquidityPool.shares(_user);
-        uint256 pending = (userShares * accFeePerShare) / 1e18 - rewardDebt[_user];
-        if (pending > 0) {
-            rewards[_user] += pending;
-            emit RewardUpdated(_user, rewards[_user]);
+        uint256 claimable = earned(_user);
+        rewardDebt[_user] = (liquidityPool.shares(_user) * accFeePerShare) / 1e18;
+        rewards[_user] = claimable;
+        if (claimable > 0) {
+            emit RewardUpdated(_user, claimable);
         }
-        rewardDebt[_user] = (userShares * accFeePerShare) / 1e18;
+    }
+
+    /// @notice Called by LiquidityPool AFTER a new deposit to correctly set the initial debt for the new share amount.
+    function updateDebt(address _user) external {
+        require(msg.sender == address(liquidityPool), "Not LiquidityPool");
+        rewardDebt[_user] = (liquidityPool.shares(_user) * accFeePerShare) / 1e18;
     }
 
 
     /// @notice Claim pro-rata share of fees
-    // [1.1] Overhauled claim logic
     function claim() external {
         // First, update rewards to capture any fees accrued since the last interaction
-        uint256 userShares = liquidityPool.shares(msg.sender);
-        uint256 pending = (userShares * accFeePerShare) / 1e18 - rewardDebt[msg.sender];
-        if (pending > 0) {
-            rewards[msg.sender] += pending;
+        uint256 claimableAmount = earned(msg.sender);
+        rewardDebt[msg.sender] = (liquidityPool.shares(msg.sender) * accFeePerShare) / 1e18;
+        rewards[msg.sender] = claimableAmount;
+        require(claimableAmount > 0, "Nothing to claim");
+        if (claimableAmount > 0) {
+            emit RewardUpdated(msg.sender, claimableAmount);
         }
-        rewardDebt[msg.sender] = (userShares * accFeePerShare) / 1e18;
-
-        uint256 claimable = rewards[msg.sender];
-        require(claimable > 0, "Nothing to claim");
 
         rewards[msg.sender] = 0;
-        claimableFees -= claimable;
-
-        asset.safeTransfer(msg.sender, claimable);
-        emit FeeClaimed(msg.sender, claimable);
+        claimableFees -= claimableAmount;
+        asset.safeTransfer(msg.sender, claimableAmount);
+        emit FeeClaimed(msg.sender, claimableAmount);
     }
 
     /// @notice Treasury withdrawal of its accumulated share

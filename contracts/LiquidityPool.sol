@@ -16,6 +16,7 @@ interface IMicroloanManager {
 // [1.5] New interface for FeePool interaction
 interface IFeePool {
     function updateReward(address user) external;
+    function updateDebt(address user) external;
 }
 
 contract LiquidityPool is Ownable {
@@ -92,12 +93,13 @@ contract LiquidityPool is Ownable {
         uint256 _shares = amount; // 1:1 share minting
         totalShares += _shares;
         shares[msg.sender] += _shares;
+
+        IFeePool(feePool).updateDebt(msg.sender);
         
         // Set timestamp only on first deposit
         if (balancesTimestamp[msg.sender] == 0) {
             balancesTimestamp[msg.sender] = block.timestamp;
         }
-
         emit Deposit(msg.sender, amount, _shares);
     }
 
@@ -115,6 +117,7 @@ contract LiquidityPool is Ownable {
 
     function collect(address user, uint256 paymentAmount) external onlyManager {
         require(paymentAmount > 0, "Zero amount");
+        require(asset.balanceOf(user) >= paymentAmount, "Not enough asset balance in user's wallet");
         asset.safeTransferFrom(user, address(this), paymentAmount);
         totalRepaid += paymentAmount;
         repaid[user] += paymentAmount;
@@ -148,9 +151,7 @@ contract LiquidityPool is Ownable {
         //require(block.timestamp - balancesTimestamp[msg.sender] > lockedInPeriod, "Withdraws are not allowed yet");
 
         //Update rewards in FeePool BEFORE shares change
-        if (feePool != address(0)) {
-            IFeePool(feePool).updateReward(msg.sender);
-        }
+        IFeePool(feePool).updateReward(msg.sender);
 
         //Simplified liquidity check
         uint256 _assetsAvailable = asset.balanceOf(address(this));
