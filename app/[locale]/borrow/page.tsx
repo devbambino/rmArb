@@ -132,7 +132,7 @@ export default function BorrowPage() {
                 <h1 className="text-3xl font-bold mt-6 mb-6">Borrow Details</h1>
                 <div className="mt-8">
                     <p className="text-lg text-gray-500">
-                        Please connect your wallet to view loan details.
+                        Please sign in to view loan details.
                     </p>
                     <LoginButton
                         size="xl"
@@ -246,7 +246,7 @@ export default function BorrowPage() {
 
             {!ready && !authenticated ? (
                 <div className="text-center mt-20 py-20 space-y-4">
-                    <p>Please connect your wallet to view loan details.</p>
+                    <p>Please sing in to view loan details.</p>
                     <LoginButton
                         size="xl"
                         className="flex items-center mx-auto py-2 px-4 gap-1.5 mt-8 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full"

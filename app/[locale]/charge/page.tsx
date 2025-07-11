@@ -226,7 +226,7 @@ export default function ChargePage() {
                 ) : (
                     <div className="mt-8">
                         <p className="text-lg text-gray-500">
-                            Please connect your wallet to generate the payment QR code.
+                            Please sign in to generate the payment QR code.
                         </p>
                         <LoginButton
                             size="xl"

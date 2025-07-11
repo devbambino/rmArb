@@ -493,7 +493,7 @@ export default function PayPage() {
             ) : (
                 <div className="mt-8">
                     <p className="text-lg text-gray-500">
-                        Please connect your wallet to scan the QR code and pay.
+                        Please sign in to scan the QR code and pay.
                     </p>
                     <LoginButton
                         size="xl"

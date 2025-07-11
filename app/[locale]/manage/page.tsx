@@ -74,7 +74,7 @@ export default function ManagePage() {
             ) : (
                 <div className="mt-8">
                     <p className="text-lg text-gray-500">
-                        Please connect your wallet to start managing it.
+                        Please sign in to start managing your balance.
                     </p>
                     <LoginButton
                         size="xl"
