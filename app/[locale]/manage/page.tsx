@@ -1,18 +1,7 @@
 "use client"
-import { useState, useEffect } from "react";
-import { useAccount, useConnect, useWriteContract, useReadContract, useWaitForTransactionReceipt, useBalance, useWatchContractEvent, useReadContracts, usePublicClient } from "wagmi";
-import { liquidityPoolAbi } from "@/lib/liquiditypool-abi";
-import { microloanAbi } from "@/lib/microloan-abi";
-import { feePoolAbi } from "@/lib/feepool-abi";
-import { usdcAbi } from "@/lib/usdc-abi";
-import { parseUnits, formatUnits, decodeEventLog } from 'viem';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useAccount, useConnect, useBalance} from "wagmi";
 import { useToast } from "@/components/ui/toastprovider";
-import { Wallet } from "lucide-react";
 import { trackEvent } from '@/lib/analytics';
-
-
 import { usePrivy } from '@privy-io/react-auth';
 import { LoginButton } from '@/components/LoginButton';
 
@@ -24,7 +13,6 @@ const UNISWAP_SWAP_USD_URL = process.env.NEXT_PUBLIC_UNISWAP_SWAP_POOL_TO_MXN_UR
 export default function ManagePage() {
     const { showToast } = useToast();
     const { address } = useAccount();
-    const { connect } = useConnect();
     const { ready, authenticated } = usePrivy();
 
     const { data: userBalanceInMXNData, refetch: getUserBalanceMXN, isLoading: isUserBalanceInMXNLoading } = useBalance({
@@ -74,7 +62,7 @@ export default function ManagePage() {
             ) : (
                 <div className="mt-8">
                     <p className="text-lg text-gray-500">
-                        Please connect your wallet to start managing it.
+                        Please sign in to start managing your balance.
                     </p>
                     <LoginButton
                         size="xl"

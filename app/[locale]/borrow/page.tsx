@@ -126,7 +126,7 @@ export default function BorrowPage() {
         }
     }, [repayConfirmed, withdrawConfirmed, address]);
 
-    if (!address) {
+    if (!ready && !authenticated) {
         return (
             <div className="min-h-screen text-white flex flex-col items-center px-4 py-12">
                 <h1 className="text-3xl font-bold mt-6 mb-6">Borrow Details</h1>
@@ -172,8 +172,8 @@ export default function BorrowPage() {
             console.log("onRepay userBalanceInMXN:", userBalanceInMXN!, " minPayment:", minPayment!);
 
             if (minPayment > userBalanceInMXN!) {
-                showToast("You don't have enough MXNb to make repayment.", "error");
-                console.log("onRepay You don't have enough MXNb to deposit.");
+                showToast("You don't have enough MXNe to make repayment.", "error");
+                console.log("onRepay You don't have enough MXNe to deposit.");
                 return;
             }
 
@@ -273,7 +273,7 @@ export default function BorrowPage() {
                             <h2 className="text-2xl font-semibold mb-2">Borrowing Pool</h2>
                             <div className="h-1 w-16 bg-[#264C73] mx-auto rounded mb-6" />
                             <span className="text-[#50e2c3]">Available to Borrow</span>
-                            <p className="text-xl">{poolBalanceInMXNData!.formatted} MXNb</p>
+                            <p className="text-xl">{poolBalanceInMXNData!.formatted} MXNe</p>
                         </div>
                     )}
                     {Number(userCollateral) > 0 && (
@@ -319,13 +319,13 @@ export default function BorrowPage() {
 
                         <div className="flex justify-between items-center">
                             <span className="font-bold">Total borrowed</span>
-                            <span className="text-xl">{Number(loan.principal) / 1e6} MXNb</span>
+                            <span className="text-xl">{Number(loan.principal) / 1e6} MXNe</span>
                         </div>
                         <div className="mt-4 h-2 bg-gray-700 rounded overflow-hidden">
                             <div style={{ width: `${pct}%` }}
                                 className="h-full bg-[#50e2c3]" />
                         </div>
-                        <p className="mt-2 text-sm">{Math.floor(pct)}% repaid ({formatUnits(loan.paid, 6)} MXNb)</p>
+                        <p className="mt-2 text-sm">{Math.floor(pct)}% repaid ({formatUnits(loan.paid, 6)} MXNe)</p>
                     </div>
 
                     {/* Repayment Schedule */}
@@ -344,7 +344,7 @@ export default function BorrowPage() {
                                     return (
                                         <tr key={i}>
                                             <td>{new Date(dueDate * 1000).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}</td>
-                                            <td>{(Number(loan.principal) / 1e6 / Number(loan.termInPeriods)).toFixed(2)} MXNb</td>
+                                            <td>{(Number(loan.principal) / 1e6 / Number(loan.termInPeriods)).toFixed(2)} MXNe</td>
                                             <td>{paid ? "✅ Paid" : (i + 1 === (Number(loan.termInPeriods) - Number(loan.pendingPayments)))
                                                 ? `Due in ${Math.ceil((dueDate * 1000 - Date.now()) / 86400000)}d`
                                                 : "Pending"}</td>
@@ -365,7 +365,7 @@ export default function BorrowPage() {
                                 <span className="text-[#50e2c3]">Due Date</span>
                                 <p>{new Date(nextDue * 1000).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}</p>
                                 <span className="text-[#50e2c3] mt-2 block">Amount</span>
-                                <p className="font-bold text-xl">{(Number(minPayment) / 1e6).toFixed(2)} MXNb</p>
+                                <p className="font-bold text-xl">{(Number(minPayment) / 1e6).toFixed(2)} MXNe</p>
                             </div>
                             <div className="flex flex-col items-center space-y-4">
                                 <Button
@@ -375,7 +375,7 @@ export default function BorrowPage() {
                                 >
                                     {approveRepayIsPending || repayIsPending ? "Repaying…" : "Repay"}
                                 </Button>
-                                <p className="text-sm text-gray-400">(You have {userBalanceInMXNData?.formatted} MXNb)</p>
+                                <p className="text-sm text-gray-400">(You have {userBalanceInMXNData?.formatted} MXNe)</p>
                             </div>
 
                         </div>

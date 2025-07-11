@@ -3,43 +3,24 @@
 import { useState, useEffect } from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
 import { Button } from "@/components/ui/button";
-import { useAccount, useConnect, useWriteContract, useWaitForTransactionReceipt, useBalance, useReadContract } from "wagmi";
+import { useAccount, useWriteContract, useWaitForTransactionReceipt, useBalance, useReadContract } from "wagmi";
 import { useToast } from "@/components/ui/toastprovider";
 import { usdcAbi } from "@/lib/usdc-abi";
 import { microloanAbi } from "@/lib/microloan-abi";
 import { useWriteContracts } from 'wagmi/experimental';
 import { parseUnits, formatUnits } from 'viem';
-import { Wallet } from "lucide-react";
 import { trackEvent } from '@/lib/analytics';
-//import chainlinkUsdMxnAbi from '@/lib/chainlink-usd-mxn-abi.json';
-
 import { usePrivy } from '@privy-io/react-auth';
 import { LoginButton } from '@/components/LoginButton';
 
-const rate = Number(process.env.NEXT_PUBLIC_RAPIMONI_FEE) / 100; // Fee rate charged per payment
+const rate = Number(process.env.NEXT_PUBLIC_RAPIMONI_FEE)/100; // Fee rate charged per payment
 const rapiMoniAddress = process.env.NEXT_PUBLIC_RAPIMONI_WALLET; // wallet address for collecting fees
 const COLLATERAL_RATIO = 1.2; // collateral should be 120% of the product price
-const USD_MXN_FEED = process.env.NEXT_PUBLIC_CHAINLINK_USD_MXN_FEED!;
 
 const USD_ADDR = process.env.NEXT_PUBLIC_USD_ADDRESS; // Testnet
 const MXN_ADDR = process.env.NEXT_PUBLIC_MXN_ADDRESS; // Testnet
-const BRZ_ADDR = process.env.NEXT_PUBLIC_BRZ_ADDRESS; // Testnet
 const MA_ADDR = process.env.NEXT_PUBLIC_MANAGER_ADDRESS!;
 const LP_ADDR = process.env.NEXT_PUBLIC_LIQUIDITY_POOL_ADDRESS!;
-//const mockMerchantAddress = process.env.NEXT_PUBLIC_MERCHANT_ADDRESS;
-
-/*function useUsdMxnRate() {
-    const { data: roundData } = useReadContract({
-        address: USD_MXN_FEED,
-        abi: chainlinkUsdMxnAbi,
-        functionName: 'latestRoundData',
-        // @ts-ignore
-        config: { cacheTime: 300_000 } // Cache for 5 minutes
-    });
-    // price is in 8 decimals
-    const price = roundData ? Number((roundData as any[])[1]) / 1e8 : 0;
-    return price;
-}*/
 
 // Helper to get token decimals (defaulting to 6 for USDC, MXN etc.)
 const getTokenDecimals = (tokenSymbol: string) => {
@@ -49,7 +30,6 @@ const getTokenDecimals = (tokenSymbol: string) => {
 export default function PayPage() {
     const { showToast } = useToast();
     const { address } = useAccount();
-    //const { connect } = useConnect();
     const { ready, authenticated } = usePrivy();
     const fxRate = 19.48;//useUsdMxnRate(); 1 USD is X MXN
     const { writeContractsAsync } = useWriteContracts();
@@ -72,7 +52,6 @@ export default function PayPage() {
     // Helper to resolve token address
     const getTokenAddress = (token: string) => {
         switch (token?.toLowerCase()) {
-            case "brl": return BRZ_ADDR!;
             case "mxn": return MXN_ADDR!;
             default: return USD_ADDR!;
         }
@@ -109,7 +88,7 @@ export default function PayPage() {
             buttonName        // Label (which button was clicked)
         );
     };
-
+    
     // Load payload from URL if present
     useEffect(() => {
         if (typeof window !== "undefined" && !payload) {
@@ -174,22 +153,20 @@ export default function PayPage() {
         //console.log("handlePayDirectWithMerchantToken fee:",fee," amountToMerchant:",amountToMerchant)
 
         try {
-            const hashPay = await writeContractsAsync({
-                contracts: [
-                    {
-                        address: merchantTokenAddress as `0x${string}`,
-                        abi: usdcAbi,
-                        functionName: 'transfer',
-                        args: [merchant as `0x${string}`, amountToMerchant],
-                    },
-                    {
-                        abi: usdcAbi,
-                        address: merchantTokenAddress as `0x${string}`,
-                        functionName: 'transfer',
-                        args: [rapiMoniAddress! as `0x${string}`, fee],
-                    }
-                ]
-            });
+            const hashPay = await writeContractsAsync({contracts: [
+                {
+                    address: merchantTokenAddress as `0x${string}`,
+                    abi: usdcAbi, 
+                    functionName: 'transfer',
+                    args: [merchant as `0x${string}`, amountToMerchant],
+                },
+                {
+                    abi: usdcAbi, 
+                    address: merchantTokenAddress as `0x${string}`,
+                    functionName: 'transfer',
+                    args: [rapiMoniAddress! as `0x${string}`, fee],
+                }
+            ]});
             setTxHash(hashPay.id);
             setStep("done");
             setIsBnplPaymentDone(false);
@@ -308,7 +285,7 @@ export default function PayPage() {
                 args: [
                     parseUnits(collateralAmountUSD.toFixed(usdDecimals), usdDecimals), // Collateral in USD (smallest unit)
                     parseUnits(loanAmountMerchantToken.toFixed(merchantTokenDecimals), merchantTokenDecimals), // Loan amount in Merchant Token (smallest unit)
-                    BigInt(loanTerm), // Loan term (e.g., in days, ensure it's a whole number) switched from uint256 to uint8
+                    BigInt(loanTerm), // Loan term (e.g., in days, ensure it's a whole number)
                     merchant as `0x${string}` // Merchant address to pay
                 ],
             }).catch(err => {
@@ -360,7 +337,7 @@ export default function PayPage() {
     return (
         <div className="min-h-screen text-white flex flex-col items-center px-4 py-12">
             <h1 className="text-3xl font-bold mt-6 mb-6">Pay Now</h1>
-            {ready && authenticated ? (
+            {ready && authenticated  ? (
                 <>
                     <div className="w-full max-w-md mx-auto p-8 border border-[#264C73] rounded-lg space-y-6 text-center relative">
                         {isProcessing && (
@@ -493,7 +470,7 @@ export default function PayPage() {
             ) : (
                 <div className="mt-8">
                     <p className="text-lg text-gray-500">
-                        Please connect your wallet to scan the QR code and pay.
+                        Please sign in to scan the QR code and pay.
                     </p>
                     <LoginButton
                         size="xl"

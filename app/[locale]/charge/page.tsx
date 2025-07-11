@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import QRCodeStyling from "qr-code-styling";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useAccount, useConnect } from "wagmi";
+import { useAccount,useConnect } from "wagmi";
 import { useToast } from "@/components/ui/toastprovider";
 import { Wallet } from "lucide-react";
 import { trackEvent } from '@/lib/analytics';
@@ -13,14 +13,12 @@ import { LoginButton } from '@/components/LoginButton';
 
 const USDTokenAddress = process.env.NEXT_PUBLIC_USD_ADDRESS; // Testnet
 const MXNTokenAddress = process.env.NEXT_PUBLIC_MXN_ADDRESS; // Testnet
-const BRZTokenAddress = process.env.NEXT_PUBLIC_BRZ_ADDRESS; // Testnet
 const rate = Number(process.env.NEXT_PUBLIC_RAPIMONI_FEE); // Fee rate charged bu RapiMoni per payment
 
 export default function ChargePage() {
     const [mounted, setMounted] = useState(false);
-    //const { connect } = useConnect();
-    const { ready, authenticated } = usePrivy();
     const { address } = useAccount();
+    const { ready, authenticated } = usePrivy();
     const [amount, setAmount] = useState("");
     const [token, setToken] = useState("mxn");
     const [description, setDescription] = useState("");
@@ -53,15 +51,13 @@ export default function ChargePage() {
     useEffect(() => {
         if (amount && !isNaN(Number(amount))) {
 
-            let symbol = "MXNe";
+            let symbol = "MXNb";
             let fiat = "$";
             let name = "MXN";
             let decimals = 2;
             if (token === "mxn") {
-                symbol = "MXNe"; fiat = "MXN$"; name = "MXN"; decimals = 2;
-            } else if (token === "brl") {
-                symbol = "BRZ"; fiat = "R$"; name = "BRL"; decimals = 2;
-            }
+                symbol = "MXNb"; fiat = "MXN$"; name = "MXN"; decimals = 2;
+            } 
             setFee(rate * loanTerm * Number(amount) / 100);
             setFeeUsd(0);
             setFiat(fiat);
@@ -190,7 +186,7 @@ export default function ChargePage() {
                             </label>
                             {enableBNPL && (
                                 <div className="mt-4 p-8 border border-gray-400 rounded-lg space-y-3">
-                                    <span className="text-sm mb-2 text-[#50e2c3]"><strong>Loan Term (months): Up to...</strong></span>
+                                    <span className="text-sm mb-2 text-[#50e2c3]"><strong>Loan Term (months):</strong></span>
                                     <select
                                         value={loanTerm}
                                         onChange={(e) => setLoanTerm(Number(e.target.value))}
@@ -199,12 +195,9 @@ export default function ChargePage() {
                                         <option value={1}>1 month</option>
                                         <option value={2}>2 months</option>
                                         <option value={3}>3 months</option>
-                                        <option value={4}>4 months</option>
-                                        <option value={5}>5 months</option>
-                                        <option value={6}>6 months</option>
                                     </select>
                                     <label className="block text-gray-400 text-sm">
-                                        Every extra month in the loan term adds a 1% discount on the money you will receive, corresponding to the loan fee
+                                        The loan fee is %3, that will be applied as a discount on the money you will receive
                                     </label>
                                 </div>
                             )}
@@ -219,16 +212,16 @@ export default function ChargePage() {
                                         <br /><span className="text-xs text-white">($USD 1  ≈ {fiat}{(Number(amount) / Number(quote)).toFixed(Number(amount) < 0.999 ? 3 : 2)})</span>
                                     </>
                                 )}
-                                <br /><span className="text-xs text-white">*Including up to {rate * loanTerm}% of fee( {fiat}{(Number(fee)).toFixed(Number(amount) < 0.999 ? 3 : 2)} {quote && (`≈ $USD ${(Number(feeUsd)).toFixed(Number(amount) < 0.999 ? 3 : 2)}`)})</span>
+                                <br /><span className="text-xs text-white">*Including a {rate * loanTerm}% of fee( {fiat}{(Number(fee)).toFixed(Number(amount) < 0.999 ? 3 : 2)} {quote && (`≈ $USD ${(Number(feeUsd)).toFixed(Number(amount) < 0.999 ? 3 : 2)}`)})</span>
                             </div>
                         )}
                     </>
                 ) : (
                     <div className="mt-8">
                         <p className="text-lg text-gray-500">
-                            Please connect your wallet to generate the payment QR code.
+                            Please do login to generate the payment QR code.
                         </p>
-                        <LoginButton
+                         <LoginButton
                             size="xl"
                             className="flex items-center mx-auto py-2 px-4 gap-1.5 mt-8 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full"
                         >
