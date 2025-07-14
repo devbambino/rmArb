@@ -129,14 +129,14 @@
   "lenders": {
     "hero": {
       "title": "Earn Attractive, Stable Yields. <br /> Directly Empower LATAM Businesses.",
-      "subtitle": "Deposit your digital pesos (MXNe) into our audited lending pool. Earn competitive returns generated from real-world microloans to small businesses, not crypto speculation. Secure, transparent, impactful.",
+      "subtitle": "Deposit your digital pesos (MXNb) into our audited lending pool. Earn competitive returns generated from real-world microloans to small businesses, not crypto speculation. Secure, transparent, impactful.",
       "cta": "Explore Lending Opportunities"
     },
     "stats": {
       "title": "Transparent Performance, Trusted Technology",
       "subtitle": "Built on public, verifiable smart contracts on the secure Base network. We prioritize clarity and the safety of your funds.",
-      "tvl": "Current Total Value Locked (MXNe)",
-      "apy": "Target APY (Paid in MXNe)",
+      "tvl": "Current Total Value Locked (MXNb)",
+      "apy": "Target APY (Paid in MXNb)",
       "uptime": "Protocol Uptime (Since Inception)",
       "partnersTitle": "Powered by trusted technology:"
     },
@@ -199,7 +199,7 @@
     "hero": {
       "title": "Pay Your Way, Instantly. <br />Digital Cash or 0% Interest Plans.",
       "subtitle": "Spotted a RapiMoni QR code? You're in luck. Pay now with digital pesos/dollars, or get an instant zero-interest loan. No credit card, no hidden fees, no hassle.",
-      "cta": "Find RapiMoni Stores"
+      "cta": "Pay at RapiMoni Stores"
     },
     "why": {
       "title": "Unlock Smooth Shopping, Even Without a Credit Card",
@@ -285,7 +285,7 @@
       "revenue": "Avg. Monthly Revenue (MXN$)",
       "ticket": "Avg. Ticket Size (MXN$)",
       "wallet": "Wallet Address (Optional)",
-      "deposit": "Intended Deposit (MXNe) (Optional)"
+      "deposit": "Intended Deposit (MXNb) (Optional)"
     },
     "errors": {
       "fullName": "Full name is required.",

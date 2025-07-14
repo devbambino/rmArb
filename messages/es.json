@@ -135,8 +135,8 @@
     "stats": {
       "title": "Rendimiento Transparente, Tecnología Confiable",
       "subtitle": "Construido sobre contratos inteligentes públicos y verificables en la segura red Base. Priorizamos la claridad y la seguridad de tus fondos.",
-      "tvl": "Valor Total Bloqueado Actual (MXNe)",
-      "apy": "APY Objetivo (Pagado en MXNe)",
+      "tvl": "Valor Total Bloqueado Actual (MXNb)",
+      "apy": "APY Objetivo (Pagado en MXNb)",
       "uptime": "Tiempo de Actividad del Protocolo (Desde Inicio)",
       "partnersTitle": "Con la confianza de la mejor tecnología:"
     },
@@ -199,7 +199,7 @@
     "hero": {
       "title": "Paga a Tu Manera, al Instante. <br />Efectivo Digital o Créditos Sin Intereses.",
       "subtitle": "¿Viste un código QR de RapiMoni? Estás de suerte. Paga ahora con pesos/dólares digitales, u obtén un préstamo instantáneo sin intereses. Sin tarjeta de crédito, sin comisiones ocultas, sin complicaciones.",
-      "cta": "Encuentra Tiendas RapiMoni"
+      "cta": "Paga en Tiendas RapiMoni"
     },
     "why": {
       "title": "Desbloquea Compras Fluidas, Incluso Sin Tarjeta de Crédito",
@@ -285,7 +285,7 @@
       "revenue": "Ingreso Mensual Promedio (MXN$)",
       "ticket": "Ticket Promedio (MXN$)",
       "wallet": "Dirección de Billetera (Opcional)",
-      "deposit": "Depósito Previsto (MXNe) (Opcional)"
+      "deposit": "Depósito Previsto (MXNb) (Opcional)"
     },
     "errors": {
       "fullName": "El nombre completo es obligatorio.",

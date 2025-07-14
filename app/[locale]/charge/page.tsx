@@ -53,12 +53,12 @@ export default function ChargePage() {
     useEffect(() => {
         if (amount && !isNaN(Number(amount))) {
 
-            let symbol = "MXNe";
+            let symbol = "MXNb";
             let fiat = "$";
             let name = "MXN";
             let decimals = 2;
             if (token === "mxn") {
-                symbol = "MXNe"; fiat = "MXN$"; name = "MXN"; decimals = 2;
+                symbol = "MXNb"; fiat = "MXN$"; name = "MXN"; decimals = 2;
             } else if (token === "brl") {
                 symbol = "BRZ"; fiat = "R$"; name = "BRL"; decimals = 2;
             }
@@ -190,7 +190,7 @@ export default function ChargePage() {
                             </label>
                             {enableBNPL && (
                                 <div className="mt-4 p-8 border border-gray-400 rounded-lg space-y-3">
-                                    <span className="text-sm mb-2 text-[#50e2c3]"><strong>Loan Term (months): Up to...</strong></span>
+                                    <span className="text-sm mb-2 text-[#50e2c3]"><strong>Loan Term (months):</strong></span>
                                     <select
                                         value={loanTerm}
                                         onChange={(e) => setLoanTerm(Number(e.target.value))}
@@ -199,12 +199,9 @@ export default function ChargePage() {
                                         <option value={1}>1 month</option>
                                         <option value={2}>2 months</option>
                                         <option value={3}>3 months</option>
-                                        <option value={4}>4 months</option>
-                                        <option value={5}>5 months</option>
-                                        <option value={6}>6 months</option>
                                     </select>
                                     <label className="block text-gray-400 text-sm">
-                                        Every extra month in the loan term adds a 1% discount on the money you will receive, corresponding to the loan fee
+                                        You pay a 3% flat fee for the loan, reflected as a discount on the money we transfer you when the user pays.
                                     </label>
                                 </div>
                             )}
@@ -219,14 +216,14 @@ export default function ChargePage() {
                                         <br /><span className="text-xs text-white">($USD 1  ≈ {fiat}{(Number(amount) / Number(quote)).toFixed(Number(amount) < 0.999 ? 3 : 2)})</span>
                                     </>
                                 )}
-                                <br /><span className="text-xs text-white">*Including up to {rate * loanTerm}% of fee( {fiat}{(Number(fee)).toFixed(Number(amount) < 0.999 ? 3 : 2)} {quote && (`≈ $USD ${(Number(feeUsd)).toFixed(Number(amount) < 0.999 ? 3 : 2)}`)})</span>
+                                <br /><span className="text-xs text-white">*Including the {rate * loanTerm}% of fee( {fiat}{(Number(fee)).toFixed(Number(amount) < 0.999 ? 3 : 2)} {quote && (`≈ $USD ${(Number(feeUsd)).toFixed(Number(amount) < 0.999 ? 3 : 2)}`)})</span>
                             </div>
                         )}
                     </>
                 ) : (
                     <div className="mt-8">
                         <p className="text-lg text-gray-500">
-                            Please sign in to generate the payment QR code.
+                            Please sign in to generate the payment link and QR code.
                         </p>
                         <LoginButton
                             size="xl"

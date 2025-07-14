@@ -72,7 +72,6 @@ export default function PayPage() {
     // Helper to resolve token address
     const getTokenAddress = (token: string) => {
         switch (token?.toLowerCase()) {
-            case "brl": return BRZ_ADDR!;
             case "mxn": return MXN_ADDR!;
             default: return USD_ADDR!;
         }
@@ -174,23 +173,19 @@ export default function PayPage() {
         //console.log("handlePayDirectWithMerchantToken fee:",fee," amountToMerchant:",amountToMerchant)
 
         try {
-            const hashPay = await writeContractsAsync({
-                contracts: [
-                    {
-                        address: merchantTokenAddress as `0x${string}`,
-                        abi: usdcAbi,
-                        functionName: 'transfer',
-                        args: [merchant as `0x${string}`, amountToMerchant],
-                    },
-                    {
-                        abi: usdcAbi,
-                        address: merchantTokenAddress as `0x${string}`,
-                        functionName: 'transfer',
-                        args: [rapiMoniAddress! as `0x${string}`, fee],
-                    }
-                ]
+            const hashPay = await writeContractAsync({
+                abi: usdcAbi,
+                address: merchantTokenAddress as `0x${string}`,
+                functionName: 'transfer',
+                args: [merchant as `0x${string}`, amountToMerchant],
             });
-            setTxHash(hashPay.id);
+            const hashPayRm = await writeContractAsync({
+                abi: usdcAbi,
+                address: merchantTokenAddress as `0x${string}`,
+                functionName: 'transfer',
+                args: [rapiMoniAddress! as `0x${string}`, fee],
+            });
+            setTxHash(hashPay);
             setStep("done");
             setIsBnplPaymentDone(false);
             showToast("Successful payment!", "success");
@@ -493,7 +488,7 @@ export default function PayPage() {
             ) : (
                 <div className="mt-8">
                     <p className="text-lg text-gray-500">
-                        Please sign in to scan the QR code and pay.
+                        Please sign in to scan the QR code or to open the link, and pay.
                     </p>
                     <LoginButton
                         size="xl"

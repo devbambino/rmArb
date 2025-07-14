@@ -59,7 +59,7 @@ export default function MerchantsView() {
                             <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto">
                                 {t('hero.subtitle')}
                             </p>
-                            <a href="#register" className="mx-auto">
+                            <a href="/charge" className="mx-auto">
                                 <Button
                                     variant="gradient"
                                     size="xl"

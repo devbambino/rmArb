@@ -88,8 +88,8 @@ export async function POST(req: NextRequest) {
       }
 
       case 'createBankAccount': {
-        const { walletAddress, clabe } = params;
-        const legalName = `${walletAddress.substring(0, 6)}${walletAddress.substring(walletAddress.length - 4)}`;
+        const { walletAddress, clabe, legalName } = params;
+        //const legalName = `${walletAddress.substring(0, 6)}${walletAddress.substring(walletAddress.length - 4)}`;
         const payload = {
           tag: walletAddress,
           recipient_legal_name: legalName,

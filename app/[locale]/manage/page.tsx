@@ -43,6 +43,7 @@ export default function ManagePage() {
     // CLABE Management State
     const [isClabeModalOpen, setIsClabeModalOpen] = useState(false);
     const [generatedClabe, setGeneratedClabe] = useState('');
+    const [legalName, setLegalName] = useState('');
 
     // --- Local Storage and Juno Bank Account ---
     const [junoBankAccount, setJunoBankAccount] = useState<any>(null);
@@ -53,6 +54,7 @@ export default function ManagePage() {
         const savedAccount = localStorage.getItem(`junoAccount_${address}`);
         if (savedAccount) {
             setJunoBankAccount(JSON.parse(savedAccount));
+            console.log("useEffect savedAccount:",savedAccount);
         }
     }, [authenticated, address]);
 
@@ -79,6 +81,7 @@ export default function ManagePage() {
         try {
             const { account } = await callBackendApi('getBankAccount', { walletAddress: address });
             if (account) {
+                console.log("handleGetOrCreateBankAccount account:",account);
                 localStorage.setItem(`junoAccount_${address}`, JSON.stringify(account));
                 setJunoBankAccount(account);
                 setIsLoading(false);
@@ -102,8 +105,8 @@ export default function ManagePage() {
         setIsLoading(true);
         setFlowMessage('Saving your bank account...');
         try {
-            console.log("handleConfirmClabe address:", address!, " generatedClabe:", generatedClabe);
-            const result = await callBackendApi('createBankAccount', { walletAddress: address!, clabe: generatedClabe });
+            console.log("handleConfirmClabe address:", address!, " generatedClabe:", generatedClabe, " legalName:",legalName);
+            const result = await callBackendApi('createBankAccount', { walletAddress: address!, clabe: generatedClabe, legalName: legalName });
             const newAccount = result.payload;
             localStorage.setItem(`junoAccount_${address}`, JSON.stringify(newAccount));
             setJunoBankAccount(newAccount);
@@ -233,7 +236,7 @@ export default function ManagePage() {
                     {isLoading && (
                         <div className="fixed inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center z-50">
                             <Loader2 className="h-12 w-12 animate-spin text-white mb-4" />
-                            <p className="text-white text-lg">{flowMessage}</p>
+                            <p className="px-2 text-white text-lg text-center w-full">{flowMessage}</p>
                         </div>
                     )}
 
@@ -242,10 +245,21 @@ export default function ManagePage() {
                         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-40">
                             <div className="bg-primary p-8 rounded-lg shadow-lg text-center max-w-md mx-4">
                                 <h3 className="text-2xl font-bold mb-4">Confirm Your Bank Account</h3>
-                                <p className="text-neutral mb-6">To deposit/withdraw funds from/to your bank account, we need your 18-digit CLABE. We have generated one for you, but you can replace it with your own if you prefer.</p>
+                                <p className="text-neutral mb-6">To deposit/withdraw funds from/to your bank account, we need your 18-digit CLABE, and your legal name associated to the account.</p>
+                                <div className="mb-6 p-8 border border-gray-400 rounded-lg space-y-3">
+                                    <label className="block text-white/50 text-sm">
+                                        <b>Production Version:</b> We have generated one CLABE for you for testing purposes, but in the production version you will need to replace it with your own valid CLABE.
+                                    </label>
+                                </div>
                                 <Input
                                     value={generatedClabe}
                                     onChange={(e) => setGeneratedClabe(e.target.value)}
+                                    className="mb-6 w-full p-3 rounded-md border border-gray-600 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#50e2c3]"
+                                />
+                                <Input
+                                    value={legalName}
+                                    onChange={(e) => setLegalName(e.target.value)}
+                                    placeholder="Your Legal Name"
                                     className="mb-6 w-full p-3 rounded-md border border-gray-600 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#50e2c3]"
                                 />
                                 <div className="flex justify-center gap-4">
@@ -270,8 +284,8 @@ export default function ManagePage() {
                                     className="mb-6 w-full p-3 rounded-md border border-gray-600 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#50e2c3]"
                                 />
                                 <div className="mb-6 p-8 border border-gray-400 rounded-lg space-y-3">
-                                    <label className="block text-gray-400 text-sm">
-                                        In production, you would need to make a SPEI transfer from your personal bank account to the following RapiMoni account CLABE:
+                                    <label className="block text-white/50 text-sm">
+                                        <b>Production Version:</b> In production, you will need to make a SPEI transfer from your personal bank account to the following RapiMoni account CLABE:
                                     </label>
                                     <span className="text-sm mb-2 text-[#50e2c3]"><strong>710969000000397144</strong></span>
                                 </div>

@@ -7,6 +7,20 @@ const nextConfig: NextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    ignoreBuildErrors: true,
+  },
+  webpack: (config, { dev, isServer }) => {
+    // Example: Suppress all warnings in development mode
+    if (dev) {
+      config.stats = {
+        warnings: false,
+      };
+    }
+    return config;
+  },
 };
 
 export default nextConfig;

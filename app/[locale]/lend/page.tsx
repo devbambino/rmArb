@@ -271,7 +271,7 @@ export default function LendPage() {
             ) : (
                 <div className="mt-8">
                     <p className="text-lg text-gray-500">
-                        Please sign in to make deposits and claim rewards.
+                        Please sign in to provide liquidity for the loans and claim good yield.
                     </p>
                     <LoginButton
                         size="xl"

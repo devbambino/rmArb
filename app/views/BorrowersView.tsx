@@ -46,7 +46,7 @@ export default function BorrowersView() {
                         <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto">
                             {t('hero.subtitle')}
                         </p>
-                        <a href="#register">
+                        <a href="/pay">
                             <Button
                                 variant="gradient"
                                 size="xl"

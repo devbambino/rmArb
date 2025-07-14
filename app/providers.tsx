@@ -3,7 +3,6 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, type ReactNode } from "react";
-//import { WagmiProvider } from "wagmi";
 import { WagmiProvider } from '@privy-io/wagmi';
 import { PrivyProvider } from '@privy-io/react-auth';
 import Layout from "@/components/Layout";

@@ -86,39 +86,51 @@ export default function Header() {
             {isOpen && (
                 <nav className="md:hidden bg-primary/90 px-4 py-2 space-y-2">
                     {ready && authenticated ? (
-                        loggedInLinks.map((link) => (
-                            <Link
-                                key={link.key}
-                                href={link.href}
-                                className="block text-white py-1 hover:underline"
-                                onClick={() => {
-                                    setOpen(false);// Close menu on click
-                                    handleNavigationClick('header_mob_' + link.key);
-                                }} 
-                            >
-                                {t(link.key)}
-                            </Link>
-                        ))
+                        <>
+                            {loggedInLinks.map((link) => (
+                                <Link
+                                    key={link.key}
+                                    href={link.href}
+                                    className="block text-white py-1 hover:underline"
+                                    onClick={() => {
+                                        setOpen(false);// Close menu on click
+                                        handleNavigationClick('header_mob_' + link.key);
+                                    }}
+                                >
+                                    {t(link.key)}
+                                </Link>
+                            ))}
+
+                            <div className="mt-4 border-t border-[#50e2c3] pt-4 flex flex-col items-start gap-4">
+                                <LocaleSwitcher />
+                                <WalletConnect />
+                            </div>
+
+                        </>
+
                     ) : (
-                        loggedOutLinks.map((link) => (
-                            <Link
-                                key={link.key}
-                                href={link.href}
-                                className="block text-white py-1 hover:underline"
-                                onClick={() => {
-                                    setOpen(false);// Close menu on click
-                                    handleNavigationClick('header_mob_' + link.key);
-                                }} 
-                            >
-                                {t(link.key)}
-                            </Link>
-                        ))
+                        <>
+                            {
+                                loggedOutLinks.map((link) => (
+                                    <Link
+                                        key={link.key}
+                                        href={link.href}
+                                        className="block text-white py-1 hover:underline"
+                                        onClick={() => {
+                                            setOpen(false);// Close menu on click
+                                            handleNavigationClick('header_mob_' + link.key);
+                                        }}
+                                    >
+                                        {t(link.key)}
+                                    </Link>
+                                ))
+                            }
+                            <div className="mt-4 border-t border-[#50e2c3] pt-4 flex flex-col items-start gap-4">
+                                <LocaleSwitcher />
+                            </div>
+                        </>
+
                     )}
-                    {/* <WalletConnect /> removed for now */}
-                    <div className="mt-4 border-t border-[#50e2c3] pt-4 flex flex-col items-start gap-4">
-                        <LocaleSwitcher />
-                        <WalletConnect />
-                    </div>
                 </nav>
             )}
         </header>
