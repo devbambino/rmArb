@@ -345,9 +345,9 @@ export default function ManagePage() {
                         <p className="text-2xl font-bold ">{Number(userBalanceInMXNData?.formatted).toFixed(2)} MXNb</p>
 
                         <div className="flex justify-center gap-4">
-                            <Button onClick={handleTopUpClick} className="p-4 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full">TopUp Wallet</Button>
+                            <Button onClick={handleTopUpClick} className="px-4 py-6 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full">TopUp Wallet</Button>
                             {/* Enable the button and link it to the new handler */}
-                            <Button onClick={handleWithdrawClick} className="p-4 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full">Withdraw to Bank</Button>
+                            <Button onClick={handleWithdrawClick} className="px-4 py-6 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full">Withdraw to Bank</Button>
                         </div>
                     </div>
                 </>

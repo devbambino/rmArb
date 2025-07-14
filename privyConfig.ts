@@ -2,11 +2,10 @@ import { type PrivyClientConfig } from '@privy-io/react-auth';
 import { arbitrum, arbitrumSepolia } from 'viem/chains';
 
 export const privyConfig: PrivyClientConfig = {
-  // All your existing Privy settings are correct
   appearance: {
     theme: 'dark',
     accentColor: '#6CB5AB',
-    logo: '/logo-sm.png',
+    //logo: '/logo-sm.png',
     //showWalletLoginFirst: true
   },
   loginMethods: ['email'],

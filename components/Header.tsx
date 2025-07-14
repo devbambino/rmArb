@@ -68,6 +68,9 @@ export default function Header() {
                 {/* <WalletConnect /> removed for now */}
                 <div className="hidden md:flex items-center gap-4">
                     <LocaleSwitcher />
+                    {ready && authenticated && (
+                         <WalletConnect />
+                    )}
                 </div>
                 {/* Mobile Menu Button */}
                 <button
