@@ -36,7 +36,7 @@ const lenderSchema = z.object({
 // Note: We use the SERVICE_ROLE_KEY here for admin-level access.
 // This key should NEVER be exposed on the client side.
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
