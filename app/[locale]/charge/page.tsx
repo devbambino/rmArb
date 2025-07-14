@@ -88,7 +88,7 @@ export default function ChargePage() {
 
     // Init QR once
     useEffect(() => {
-        console.log(`QR ref qrRef:${qrRef.current} qrInstance:${qrInstance.current} mounted:${mounted}`);
+        //console.log(`QR ref qrRef:${qrRef.current} qrInstance:${qrInstance.current} mounted:${mounted}`);
         if (mounted && qrRef.current && !qrInstance.current) {
             const qr = new QRCodeStyling({ width: 256, height: 256, data: "" });
             qrRef.current.innerHTML = "";

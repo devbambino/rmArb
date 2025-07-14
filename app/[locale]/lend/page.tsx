@@ -134,7 +134,7 @@ export default function LendPage() {
             } else {
                 showToast("An error occurred during deposit.", "error");
             }
-            console.error("Deposit Error:", err);
+            //console.error("Deposit Error:", err);
         }
     };
 
@@ -159,7 +159,7 @@ export default function LendPage() {
             } else {
                 showToast("An error occurred during claim.", "error");
             }
-            console.error("Claim Error:", err);
+            //console.error("Claim Error:", err);
         }
     };
 
@@ -188,7 +188,7 @@ export default function LendPage() {
             } else {
                 showToast("An error occurred during withdrawal.", "error");
             }
-            console.error("Withdrawal Error:", err);
+            //console.error("Withdrawal Error:", err);
         }
     };
 

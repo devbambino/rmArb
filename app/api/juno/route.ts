@@ -38,7 +38,7 @@ async function callJunoApi(endpoint: string, method: 'GET' | 'POST' = 'GET', bod
 
   if (!response.ok) {
     const errorText = await response.text();
-    console.error(`Juno API Error: ${response.status} ${response.statusText}`, errorText);
+    //console.error(`Juno API Error: ${response.status} ${response.statusText}`, errorText);
     throw new Error(`Juno API request failed: ${errorText}`);
   }
 
@@ -154,7 +154,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
     }
   } catch (error: any) {
-    console.error("API Route Error:", error);
+    //console.error("API Route Error:", error);
     return NextResponse.json({ error: error.message || 'An internal server error occurred' }, { status: 500 });
   }
 }

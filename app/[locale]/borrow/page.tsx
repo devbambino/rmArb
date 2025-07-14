@@ -169,11 +169,11 @@ export default function BorrowPage() {
         try {
             getUserBalanceMXN();
             let userBalanceInMXN = userBalanceInMXNData?.value;
-            console.log("onRepay userBalanceInMXN:", userBalanceInMXN!, " minPayment:", minPayment!);
+            //console.log("onRepay userBalanceInMXN:", userBalanceInMXN!, " minPayment:", minPayment!);
 
             if (minPayment > userBalanceInMXN!) {
                 showToast("You don't have enough MXNb to make repayment.", "error");
-                console.log("onRepay You don't have enough MXNb to deposit.");
+                //console.log("onRepay You don't have enough MXNb to deposit.");
                 return;
             }
 
@@ -183,7 +183,7 @@ export default function BorrowPage() {
                 functionName: 'approve',
                 args: [LP_ADDR as `0x${string}`, minPayment],
             });
-            console.log("onRepay  approveRepayHash:", approveRepayHash);
+            //.log("onRepay  approveRepayHash:", approveRepayHash);
 
             await repay({
                 address: MA_ADDR as `0x${string}`,
@@ -191,12 +191,12 @@ export default function BorrowPage() {
                 functionName: 'repay',
                 args: [minPayment],
             });
-            console.log("onRepay  repayHash:", repayHash);
+            //console.log("onRepay  repayHash:", repayHash);
 
             showToast("Congrats: Repayment done!", "success");
 
         } catch (err: any) {
-            console.error("onRepay  Error onRepay:", err);
+            //console.error("onRepay  Error onRepay:", err);
             const errorStr =
                 typeof err === "string"
                     ? err
@@ -220,11 +220,11 @@ export default function BorrowPage() {
                 abi: microloanAbi,
                 functionName: 'withdrawCollateral'
             });
-            console.log("onWithdraw  withdrawHash:", withdrawHash);
+            //console.log("onWithdraw  withdrawHash:", withdrawHash);
             showToast("Congrats: Withdrawal done!", "error");
 
         } catch (err: any) {
-            console.error("Withdrawal Error onWithdraw:", err);
+            //console.error("Withdrawal Error onWithdraw:", err);
             const errorStr =
                 typeof err === "string"
                     ? err

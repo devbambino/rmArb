@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
     // Insert the validated and potentially transformed data
     const { error } = await supabase.from(tableName!).insert([dataToInsert]); // Use tableName! as it's assigned in switch
     if (error) {
-      console.error('Supabase error:', error);
+      //console.error('Supabase error:', error);
       // Check for specific Supabase errors if needed, e.g., unique constraint violation
       if (error.code === '23505') { // Postgres unique violation
          return NextResponse.json({ error: 'This email or phone number might already be registered.' , details: error.message }, { status: 409 });
@@ -106,7 +106,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: 'Lead successfully registered!' }, { status: 201 });
 
   } catch (error) {
-    console.error('Server error:', error);
+    //console.error('Server error:', error);
     let errorMessage = 'An unexpected error occurred.';
     if (error instanceof Error) {
       errorMessage = error.message;

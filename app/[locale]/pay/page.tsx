@@ -149,7 +149,7 @@ export default function PayPage() {
     };
 
     const handleError = (err: any, currentStep: "decide" | "scan" = "decide") => {
-        console.error("Payment Error:", err);
+        //console.error("Payment Error:", err);
         const errorStr = typeof err === "string" ? err : err?.message || err?.reason || JSON.stringify(err);
         if (errorStr.includes("no valid median")) {
             showToast(`The oracle for the ${payload?.token.toUpperCase()}/USD pair is temporarily not working. Please try again later or use another currency.`, "error");
@@ -477,7 +477,7 @@ export default function PayPage() {
                             <Scanner
                                 onScan={(result) => handleScan(result)}
                                 onError={(error) => {
-                                    console.error("QR Scanner Error:", error);
+                                    //console.error("QR Scanner Error:", error);
                                     showToast("QR Scanner error. Please try again or ensure camera permissions.", "error");
                                     setStep("init");
                                 }}

@@ -13,6 +13,7 @@ import { parseUnits } from 'viem';
 
 const MXN_ADDR = process.env.NEXT_PUBLIC_MXN_ADDRESS!;
 const USD_ADDR = process.env.NEXT_PUBLIC_USD_ADDRESS!;
+const UNISWAP_SWAP_USDC_URL = process.env.NEXT_PUBLIC_UNISWAP_SWAP_POOL_FROM_MXN_URL!;
 //RapiMoni's main wallet address asigned by Juno for crypto-deposits
 const RAPI_MONI_JUNO_WALLET = process.env.NEXT_PUBLIC_RAPI_MONI_JUNO_WALLET!;
 
@@ -54,7 +55,7 @@ export default function ManagePage() {
         const savedAccount = localStorage.getItem(`junoAccount_${address}`);
         if (savedAccount) {
             setJunoBankAccount(JSON.parse(savedAccount));
-            console.log("useEffect savedAccount:",savedAccount);
+            //console.log("useEffect savedAccount:", savedAccount);
         }
     }, [authenticated, address]);
 
@@ -81,7 +82,7 @@ export default function ManagePage() {
         try {
             const { account } = await callBackendApi('getBankAccount', { walletAddress: address });
             if (account) {
-                console.log("handleGetOrCreateBankAccount account:",account);
+                //console.log("handleGetOrCreateBankAccount account:", account);
                 localStorage.setItem(`junoAccount_${address}`, JSON.stringify(account));
                 setJunoBankAccount(account);
                 setIsLoading(false);
@@ -105,7 +106,7 @@ export default function ManagePage() {
         setIsLoading(true);
         setFlowMessage('Saving your bank account...');
         try {
-            console.log("handleConfirmClabe address:", address!, " generatedClabe:", generatedClabe, " legalName:",legalName);
+            //console.log("handleConfirmClabe address:", address!, " generatedClabe:", generatedClabe, " legalName:", legalName);
             const result = await callBackendApi('createBankAccount', { walletAddress: address!, clabe: generatedClabe, legalName: legalName });
             const newAccount = result.payload;
             localStorage.setItem(`junoAccount_${address}`, JSON.stringify(newAccount));
@@ -134,21 +135,21 @@ export default function ManagePage() {
         setIsTopUpModalOpen(false);
         setFlowMessage('Initiating mock deposit...');
         try {
-            console.log("handleInitiateTopUp clabe:", junoBankAccount.clabe, " recipient_legal_name:", junoBankAccount.recipient_legal_name);
+            //console.log("handleInitiateTopUp clabe:", junoBankAccount.clabe, " recipient_legal_name:", junoBankAccount.recipient_legal_name);
             const depositResult = await callBackendApi('initiateOnRampDeposit', {
                 amount: topUpAmount,
                 userClabe: junoBankAccount.clabe,
                 userLegalName: junoBankAccount.recipient_legal_name
             });
             const isoDateFrom = new Date(Date.now() - 60000).toISOString(); // check last minute for tx
-            console.log("handleInitiateTopUp isoDateFrom:", isoDateFrom);
+            //console.log("handleInitiateTopUp isoDateFrom:", isoDateFrom);
 
             setFlowMessage('Confirming issuance...');
             // Polling logic: For brevity, this is simplified. Production version would use polling)
             await new Promise(resolve => setTimeout(resolve, 5000)); // Simulate polling
 
             setFlowMessage('Issuance complete! Withdrawing MXNb to your wallet...');
-            console.log("handleInitiateTopUp topUpAmount:", topUpAmount, " address:", address!);
+            //console.log("handleInitiateTopUp topUpAmount:", topUpAmount, " address:", address!);
             await callBackendApi('withdrawMxnbToWallet', { amount: topUpAmount, walletAddress: address! });
 
             await new Promise(resolve => setTimeout(resolve, 12000)); // Simulate polling
@@ -184,11 +185,11 @@ export default function ManagePage() {
             showToast("Insufficient MXNb balance.", "error");
             return;
         }
-        
+
         setIsLoading(true);
         setIsWithdrawModalOpen(false);
         setFlowMessage('Please approve the transfer in your wallet...');
- 
+
         try {
             // Step 1: User sends MXNb to RapiMoni's Juno wallet
             await transferMxnb({
@@ -208,7 +209,7 @@ export default function ManagePage() {
                 amount: parseFloat(withdrawAmount),
                 bankId: junoBankAccount.id,
             });
-            
+
             await new Promise(resolve => setTimeout(resolve, 15000)); // Simulate polling for redemption
 
             showToast('Withdrawal initiated! Funds are on their way to your bank.', 'success');
@@ -327,8 +328,12 @@ export default function ManagePage() {
                         <div className="text-4xl mb-2">🇺🇸</div>
                         <span className="text-[#50e2c3]">You have</span>
                         <p className="text-2xl font-bold">{Number(userBalanceInUSDData?.formatted).toFixed(2)} USDC</p>
-                        {/* Note: This external link might need to be replaced with the Bitso USDC to MXN OffRamp flow */}
-                        <Button disabled className="p-4 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full">Withdraw to Bank</Button>
+                        {(userBalanceInMXNData && userBalanceInMXNData?.value > 0) && (
+                            <>
+                                <a href={UNISWAP_SWAP_USDC_URL} target="_blank" className="p-4 bg-[#264C73] hover:bg-[#50e2c3] text-white hover:text-gray-900 rounded-full">Get USDC(Mainnet)</a>
+                                <br />
+                            </>
+                        )}
                     </div>
 
                     {/* MXN section */}
