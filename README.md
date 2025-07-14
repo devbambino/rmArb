@@ -15,8 +15,8 @@ All the smart contracts are located inside `/contracts`.
 The term period for the loans are scaled down to 1 min(60 secs) for testing, so 1 month of term adds 1 min to the term inside the smart contract.
 
 For testing you could creat your own users(a valid email is needed), or try our privy test accounts prefunded with tokens:
-Merchant: email = test-7451@privy.io, confirmationCode = 972324
-Shopper/Borrower: email = test-1299@privy.io, confirmationCode = 896735
+* Merchant: email = test-7451@privy.io, confirmationCode = 972324
+* Shopper/Borrower: email = test-1299@privy.io, confirmationCode = 896735
 
 For checking the proof of deployment go to: [Proof of Deployment](#proof-of-deployment)
 
